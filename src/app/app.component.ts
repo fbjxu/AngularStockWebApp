@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'stock-web-app';
+  stocks = [ 
+    { symbol: 'TSLA', name: 'Tesla, Inc.'},
+    { symbol: 'MSFT', name: 'Microsoft Corporation'},
+    { symbol: 'SPCE', name: 'Virgin Galactic'},
+    { symbol: 'CVS', name: 'CVS Pharmacy'},
+  ];
+  
 }

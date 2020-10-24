@@ -1,12 +1,19 @@
+
 <app-header></app-header>
+
+
+<div class = "search-section">
+    <app-search></app-search>
+</div>
+
 <div class="container text-center search-text">
-    <h1>Search Stock</h1>
-    <form action="">
-        <div class="rounded-pill search-icon-border search-bar-pos-size">
-          <div class="input-group">
-            <input type="search" aria-describedby="button-addon1" class="form-control rounded-pill border-0">
-            <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
-          </div>
+    <div *ngFor="let stock of stocks">
+        <div class="stock-div">
+            <span class="symbol">{{ stock.symbol }}</span>
+            <span class="company-name">({{ stock.name }})</span>
         </div>
-    </form>
+    </div>
+    <div class="footer">
+        <p>Powered by Tiingo. Develope by James Bobo</p>
+    </div>
 </div>
