@@ -11,7 +11,6 @@ export class ComponentLayoutServiceService {
 
   setTicker( ticker: string) {
     this.ticker = ticker;
-    this.isVisible = !(ticker == null || typeof ticker == 'undefined');
   }
 
   makeInvisible() {
