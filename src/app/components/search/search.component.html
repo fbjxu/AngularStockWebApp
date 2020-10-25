@@ -1,6 +1,6 @@
 <div class="search-component">
     <h1>Search Stock</h1>
-    <form action="">
+    <form (ngSubmit)="onSubmit()">
         <div class="rounded-pill search-icon-border">
             <div class="input-group">
                 <input type="text" name="title" [(ngModel)]="title" aria-describedby="button-addon1" class="form-control rounded-pill border-0">
@@ -8,6 +8,5 @@
                         class="fa fa-search"></i></button>
             </div>
         </div>
-        {{ title }}
     </form>
 </div>

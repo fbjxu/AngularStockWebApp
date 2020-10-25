@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ComponentLayoutServiceService } from 'src/app/services/component-layout-service.service';
+
 
 @Component({
   selector: 'app-search',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
   title:string;
-  constructor() { }
+  constructor(private router: Router, public componentLayoutService: ComponentLayoutServiceService) { }
 
   ngOnInit(): void {
+  }
+
+  makeSearchInvisible() {
+    this.componentLayoutService.makeInvisible();
+  }
+
+  onSubmit() {    
+    const ticker = this.title;
+    this.makeSearchInvisible();
+    this.router.navigate(['/details/', ticker]); 
+    
   }
 
 }
