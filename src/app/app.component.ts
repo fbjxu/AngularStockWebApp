@@ -10,5 +10,4 @@ export class AppComponent {
   text = ""
   messages = this.http.get<any>('http://localhost:80').subscribe(data =>this.text=JSON.stringify(data));
   constructor(private http: HttpClient) {}
-  
 }

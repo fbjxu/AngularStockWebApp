@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-stock-details',
@@ -6,9 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./stock-details.component.css']
 })
 export class StockDetailsComponent implements OnInit {
-  @Input() ticker: string;
+  ticker:string; //corresponding stock ticker for the detailed page 
 
-  constructor() { }
+  constructor(private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
   }
