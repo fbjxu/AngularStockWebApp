@@ -7,6 +7,7 @@ import { map, retryWhen, delayWhen } from 'rxjs/operators';
 
 // self-defined objects
 import { companySummary } from '../models/companySummary';
+import { tickerPrice } from '../models/tickerPrice';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,12 @@ export class DataServiceService {
   public getSummary(ticker: string): Observable<companySummary> {
     let observable: Observable<companySummary>;
     observable = this.http.get<companySummary>('http://localhost:80/api/summary/'+ticker);
+    return observable;
+  }
+
+  public getPrice(ticker: string): Observable<tickerPrice> {
+    let observable: Observable<tickerPrice>;
+    observable = this.http.get<tickerPrice>('http://localhost:80/api/pricesummary/'+ticker);
     return observable;
   }
 }
