@@ -9,6 +9,7 @@
                         class="fa fa-search"></i></button>
             </div>
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <div *ngIf="showAutoLoading"><mat-spinner></mat-spinner></div>
                 <mat-option *ngFor="let option of objectOptions" [value]="option">
                     {{ option.name }}
                 </mat-option>

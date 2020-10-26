@@ -16,3 +16,6 @@
     border: rgba(255, 255, 255, 0);
  }
 
+ mat-spinner {
+     zoom: 0.4;
+ }
