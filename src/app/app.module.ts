@@ -10,10 +10,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StockDetailComponent } from './components/stock-detail/stock-detail.component'
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 //material
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MainComponent } from './components/main/main.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +25,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
     HeaderComponent,
     SearchComponent,
     PortfolioComponent,
-    WatchlistComponent
+    WatchlistComponent,
+    MainComponent,
+    StockDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

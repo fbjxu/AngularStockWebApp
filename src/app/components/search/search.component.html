@@ -5,7 +5,7 @@
             <div class="input-group">
                 <input type="text" name="title" [(ngModel)]="title" aria-describedby="button-addon1" class="form-control rounded-pill border-0">
                 <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i
-                        class="fa fa-search"></i></button>
+                        class="fa fa-search" [routerLink]="['/details', title]"></i></button>
             </div>
         </div>
     </form>

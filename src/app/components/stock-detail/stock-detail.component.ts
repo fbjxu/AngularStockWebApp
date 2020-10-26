@@ -3,22 +3,22 @@ import { ActivatedRoute } from '@angular/router';
 import { ComponentLayoutServiceService } from 'src/app/services/component-layout-service.service';
 import { DataServiceService } from 'src/app/services/data-service.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
-
 import { Observable } from 'rxjs';
 import { companySummary } from 'src/app/models/companySummary';
 import { tickerPrice } from 'src/app/models/tickerPrice';
 
 @Component({
-  selector: 'app-stock-details',
-  templateUrl: './stock-details.component.html',
-  styleUrls: ['./stock-details.component.css']
+  selector: 'app-stock-detail',
+  templateUrl: './stock-detail.component.html',
+  styleUrls: ['./stock-detail.component.css']
 })
-export class StockDetailsComponent implements AfterViewInit{
-  
+
+export class StockDetailComponent implements AfterViewInit {
+
   ticker: string;
   summary: companySummary;
   price: tickerPrice;
-  test: string;
+  showSummary: boolean = false;
 
   //stock info
   constructor(private route: ActivatedRoute, public componentLayoutService:ComponentLayoutServiceService, 
@@ -44,6 +44,6 @@ export class StockDetailsComponent implements AfterViewInit{
 
   ngAfterViewInit() {
     this.spinnerService.invisible();
+    this.showSummary = true;
   }
-
 }

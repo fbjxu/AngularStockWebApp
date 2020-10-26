@@ -2,19 +2,20 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
-import { StockDetailsComponent } from './components/stock-details/stock-details.component';
+import { StockDetailComponent } from './components/stock-detail/stock-detail.component';
+import { MainComponent } from './components/main/main.component';
+
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
+  { path: "", component: MainComponent},
+  { path: "portfolio", component: PortfolioComponent},
+  { path: "watchlist", component: WatchlistComponent },
   {
     path: 'details', children: [
-      { path: ":ticker", component: StockDetailsComponent }
+      { path: ":ticker", component: StockDetailComponent }
     ]
-  },
-  {
-    path: "portfolio", component: PortfolioComponent
-  },
-  { path: "watchlist", component: WatchlistComponent }
+  }
 ];
 
 @NgModule({

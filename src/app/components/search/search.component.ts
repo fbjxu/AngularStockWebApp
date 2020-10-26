@@ -15,15 +15,9 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  makeSearchInvisible() {
-    this.componentLayoutService.makeInvisible();
-  }
-
   onSubmit() {    
-    const ticker = this.title;
-    this.makeSearchInvisible();
-    this.router.navigate(['/details/', ticker]); 
-    
+    // const ticker = this.title;
+    this.componentLayoutService.makeInvisible();
   }
 
 }
