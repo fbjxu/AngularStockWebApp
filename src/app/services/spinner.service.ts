@@ -23,10 +23,5 @@ export class SpinnerService {
     console.log('Im inside getIsOpen');
     return this.isSpinning$;
   }
-
-  public getIsClose(): Observable<boolean>{
-    console.log('Im inside getIsClose');
-    return this.isSpinning$;
-  }
 }
 
