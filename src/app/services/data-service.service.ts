@@ -8,6 +8,7 @@ import { map, retryWhen, delayWhen } from 'rxjs/operators';
 // self-defined objects
 import { companySummary } from '../models/companySummary';
 import { tickerPrice } from '../models/tickerPrice';
+import { autoCompleteEntry } from '../models/autoCompleteEntry';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,12 @@ export class DataServiceService {
   public getPrice(ticker: string): Observable<tickerPrice> {
     let observable: Observable<tickerPrice>;
     observable = this.http.get<tickerPrice>('http://localhost:80/api/pricesummary/'+ticker);
+    return observable;
+  }
+
+  public getAutoComplete(input: string): Observable<autoCompleteEntry[]> {
+    let observable: Observable<autoCompleteEntry[]>;
+    observable = this.http.get<autoCompleteEntry[]>('http://localhost:80/api/autocomplete/'+input);
     return observable;
   }
 }

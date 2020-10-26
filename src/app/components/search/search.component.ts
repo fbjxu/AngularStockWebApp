@@ -10,6 +10,10 @@ import { ComponentLayoutServiceService } from 'src/app/services/component-layout
 })
 export class SearchComponent implements OnInit {
   title:string;
+  objectOptions =[
+    { name: "Angular"},
+    { name: "React"}
+  ]
   constructor(private router: Router, public componentLayoutService: ComponentLayoutServiceService) { }
 
   ngOnInit(): void {
@@ -18,6 +22,10 @@ export class SearchComponent implements OnInit {
   onSubmit() {    
     // const ticker = this.title;
     this.componentLayoutService.makeInvisible();
+  }
+
+  displayFn(subject) {
+    return subject? subject.name : undefined;
   }
 
 }

@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 //material
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MainComponent } from './components/main/main.component';
 
 
@@ -36,7 +37,8 @@ import { MainComponent } from './components/main/main.component';
     FormsModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
-    CommonModule
+    CommonModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
