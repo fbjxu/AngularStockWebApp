@@ -20,8 +20,9 @@ export class SearchComponent implements OnInit {
   }
 
   onSubmit() {    
-    // const ticker = this.title;
+    const ticker = this.title;
     this.componentLayoutService.makeInvisible();
+    this.router.navigate(["details/",ticker])
   }
 
   displayFn(subject) {
