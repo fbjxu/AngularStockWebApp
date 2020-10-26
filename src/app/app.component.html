@@ -1,14 +1,21 @@
 <app-header></app-header>
-<div *ngIf="componentLayoutService.isVisible" class = "search-section">
-    <app-search></app-search>
+<div *ngIf="isSpinning | async">
+    <mat-spinner></mat-spinner>
 </div>
-<div class="container text-center search-text">
-    <div class="footer">
-        <p>Powered by Tiingo. Develope by James Bobo</p>
 
+<div *ngIf="true">
+    <div *ngIf="componentLayoutService.isVisible" class = "search-section">
+        <app-search></app-search>
     </div>
-    <!-- <p>{{ text.description }}</p>
-    <p>{{ text.startDate }}</p> -->
+    <div class="container text-center search-text">
+        <div class="footer">
+            <p>Powered by Tiingo. Develope by James Bobo</p>
+
+        </div>
+        <!-- <p>{{ text.description }}</p>
+        <p>{{ text.startDate }}</p> -->
+    </div>
 </div>
+
 
 <router-outlet></router-outlet>

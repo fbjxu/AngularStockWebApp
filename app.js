@@ -1,9 +1,10 @@
 var express = require('express');
 var cors = require('cors');
 var app = express();
+app.use(cors());
 
 var token = "token=a4d9cb249227d4a1c64fac98783787069f17c866"
-app.use(cors());
+
 const fetch = require('node-fetch');
 
 

@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentLayoutServiceService } from 'src/app/services/component-layout-service.service';
 import { DataServiceService } from 'src/app/services/data-service.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
-import { Observable, Subscription, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { companySummary } from 'src/app/models/companySummary';
 import { tickerPrice } from 'src/app/models/tickerPrice';
 
@@ -12,14 +13,17 @@ import { tickerPrice } from 'src/app/models/tickerPrice';
   templateUrl: './stock-details.component.html',
   styleUrls: ['./stock-details.component.css']
 })
-export class StockDetailsComponent {
+export class StockDetailsComponent implements AfterViewInit{
+  
   ticker: string;
   summary: companySummary;
   price: tickerPrice;
   test: string;
 
   //stock info
-  constructor(private route: ActivatedRoute, public componentLayoutService:ComponentLayoutServiceService, private dataService: DataServiceService) { 
+  constructor(private route: ActivatedRoute, public componentLayoutService:ComponentLayoutServiceService, 
+    private dataService: DataServiceService, private spinnerService:SpinnerService) { 
+    this.spinnerService.visible();
     this.componentLayoutService.makeInvisible(); //make search section disappear
     this.ticker = this.route.snapshot.params['ticker']; //set ticker
     this.lookUpSummary();
@@ -36,11 +40,10 @@ export class StockDetailsComponent {
     priceSummaryObserve.subscribe(priceData=>{
       this.price = priceData[0];//the response is an array
     });
-
-    
-    
-
   }
 
+  ngAfterViewInit() {
+    this.spinnerService.invisible();
+  }
 
 }
