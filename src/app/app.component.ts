@@ -16,9 +16,7 @@ import { Observable } from 'rxjs/internal/Observable';
 export class AppComponent implements AfterViewInit{
   title = 'stock-web-app';
   isSpinning: Observable<boolean>;
-
-  // messages = this.http.get<any>('http://localhost:80').subscribe(data =>this.text=JSON.stringify(data));
-  // messages2 = this.http.get<any>('http://localhost:80/api/summary/msft').subscribe(data =>this.text=data);
+  
   constructor(private http: HttpClient, public componentLayoutService: ComponentLayoutServiceService, private spinnerService: SpinnerService,
     private location: Location) {
   }
