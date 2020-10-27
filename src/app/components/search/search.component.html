@@ -5,18 +5,20 @@
             <div class="rounded-pill search-icon-border">
                 <div class="input-group">
                     <input type="text" matInput [matAutocomplete]="auto" [formControl]="myControl"
-                        [(ngModel)]="title" aria-describedby="button-addon1" class="form-control rounded-pill border-0">
+                        name = "title" [(ngModel)]="title" aria-describedby="button-addon1" class="form-control rounded-pill border-0">
                     <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i
                             class="fa fa-search"></i></button>
                 </div>
-                <mat-autocomplete #auto="matAutocomplete" >
-                    <div *ngIf="showAutoLoading">
-                        <mat-spinner></mat-spinner>
-                    </div>
-                    <mat-option *ngFor="let option of objectOptions;" [value]="option">
-                        <!-- <span class="bold-text">{{ option.ticker }}</span> | {{ option.name }}  [displayWith]="displayFn"-->
-                        {{ option }}
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option  *ngIf="showAutoLoading">
+                            <mat-spinner></mat-spinner>
                     </mat-option>
+                    <div *ngIf="!showAutoLoading">
+                        <mat-option *ngFor="let option of objectPreOptions;" [value]="option.ticker">
+                            <span class="bold-text">{{ option.ticker }}</span> | {{ option.name }}  
+                            <!-- {{ option }} -->
+                        </mat-option>
+                    </div>
                 </mat-autocomplete>
             </div>
 
