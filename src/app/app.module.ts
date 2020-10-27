@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,13 +11,13 @@ import { SearchComponent } from './components/search/search.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { StockDetailComponent } from './components/stock-detail/stock-detail.component'
-
+import { MainComponent } from './components/main/main.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 //material
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MainComponent } from './components/main/main.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -38,7 +38,9 @@ import { MainComponent } from './components/main/main.component';
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     CommonModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
