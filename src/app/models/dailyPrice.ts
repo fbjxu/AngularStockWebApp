@@ -1,5 +1,5 @@
 export class dailyPrice {
-    date: Date;
+    date: string;
     close: number;
     volume: number;
 }

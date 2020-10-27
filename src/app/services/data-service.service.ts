@@ -9,6 +9,7 @@ import { map, retryWhen, delayWhen } from 'rxjs/operators';
 import { companySummary } from '../models/companySummary';
 import { tickerPrice } from '../models/tickerPrice';
 import { autoCompleteEntry } from '../models/autoCompleteEntry';
+import { dailyPrice } from '../models/dailyPrice';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,12 @@ export class DataServiceService {
   public getAutoComplete(input: string): Observable<autoCompleteEntry[]> {
     let observable: Observable<autoCompleteEntry[]>;
     observable = this.http.get<autoCompleteEntry[]>('http://localhost:80/api/autocomplete/'+input);
+    return observable;
+  }
+
+  public getDailyChart(ticker: string): Observable<dailyPrice[]> {
+    let observable: Observable<dailyPrice[]>;
+    observable = this.http.get<dailyPrice[]>('http://localhost:80/api/dailychartsummary/'+ticker);
     return observable;
   }
 }
