@@ -32,16 +32,11 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     const result =  this.myControl.valueChanges.pipe(
       tap(ev => this.showAutoLoading = true),
-      debounceTime(400)).
+      debounceTime(500)).
     subscribe(value=>
       { 
         this.lookupAutoCompleteEntries(value);
       });
-    // this.myControl.valueChanges.subscribe(value=>this.lookupAutoCompleteEntries(value));
-      // .pipe(
-      //   startWith(''),
-      //   map(value => this._filter(value))
-      // );
   }
 
   onSubmit() {    

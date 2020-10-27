@@ -1,13 +1,30 @@
+//packages
 var express = require('express');
 var cors = require('cors');
+const fetch = require('node-fetch');
 var app = express();
 app.use(cors());
 
-var token = "token=a4d9cb249227d4a1c64fac98783787069f17c866"
 
-const fetch = require('node-fetch');
+//helper attributes
+var token = "token=a4d9cb249227d4a1c64fac98783787069f17c866";
+var today = getDate(new Date());
+
+//helper functions
+function getDate(date) {
+    var date = new Date(date),
+        month = '' + (date.getMonth() + 1),
+        day = '' + date.getDate(),
+        year = date.getFullYear();
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+    return [year, month, day].join('-');
+}
 
 
+//API: automcomplete
 app.get('/api/autocomplete/:ticker', function (req, res) {
 
     fetch("https://api.tiingo.com/tiingo/utilities/search/"+req.params.ticker+"?" + token, {
@@ -18,6 +35,7 @@ app.get('/api/autocomplete/:ticker', function (req, res) {
     
 });
 
+//API: company description summary
 app.get('/api/summary/:ticker', function (req, res) {
     fetch("https://api.tiingo.com/tiingo/daily/"+req.params.ticker+"?" + token, {
         headers: { 'Content-Type': 'application/json' }
@@ -27,6 +45,7 @@ app.get('/api/summary/:ticker', function (req, res) {
     
 });
 
+//API: priceSummary
 app.get('/api/pricesummary/:ticker', function (req, res) {
 
     fetch("https://api.tiingo.com/iex/"+req.params.ticker+"?" + token, {
@@ -37,6 +56,18 @@ app.get('/api/pricesummary/:ticker', function (req, res) {
     
 });
 
+//API: dailyChart
+app.get('/api/dailychartsummary/:ticker', function (req, res) {
+    var startDate  
+    fetch("https://api.tiingo.com/iex/"+req.params.ticker+"/prices?"+token+"&startDate="+today+"&resampleFreq=4min&columns=close,volume", {
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(data=>{res.json(data)});
+});
+
+
+//Open port
 app.listen(80, function () {
 console.log('CORS- enabled web server listening on port 80')
 });

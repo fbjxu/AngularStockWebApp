@@ -18,6 +18,8 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatTabsModule} from '@angular/material/tabs';
+import { DailyChartComponent } from './components/daily-chart/daily-chart.component';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     PortfolioComponent,
     WatchlistComponent,
     MainComponent,
-    StockDetailComponent
+    StockDetailComponent,
+    DailyChartComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     CommonModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

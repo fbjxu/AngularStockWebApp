@@ -1,32 +1,38 @@
-<div *ngIf="showSummary">
-    <div>
-        <h2>{{ summary.ticker}} </h2>
-        <h3>{{ summary.name}} </h3>
-        <p>{{ summary.exchangeCode }}</p>
-        <table>
-            <tr>
-                <td>High Price: {{ price.high }}</td>
-                <td>Mid Price: {{ price.mid }}</td>
-            </tr>
-            <tr>
-                <td>Low Price: {{ price.low }}</td>
-                <td>Ask Price: {{ price.askPrice }}</td>
-            </tr>
-            <tr>
-                <td>Open Price: {{ price.open }}</td>
-                <td>Ask Size: {{ price.askSize }}</td>
-            </tr>
-            <tr>
-                <td>Prev. Close: {{ price.last }}</td>
-                <td>Bid Price: {{ price.bidPrice }}</td>
-            </tr>
-            <tr>
-                <td>Volume: {{ price.volume }}</td>
-                <td>Bid Size: {{ price.bidSize }}</td>
-            </tr>
-        </table>
-        <h5><b>Company's Description</b></h5>
-        <p>Start Date: {{ summary.startDate }} </p>
-        <p>company description: {{ summary.description }}</p>
-    </div>
+<div *ngIf="showSummary" class = "container">
+    <h2>{{ summary.ticker}} </h2>
+    <h3>{{ summary.name}} </h3>
+    <p>{{ summary.exchangeCode }}</p>
+    <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="Summary">
+            <div>
+                <table>
+                    <tr>
+                        <td>High Price: {{ price.high }}</td>
+                        <td>Mid Price: {{ price.mid }}</td>
+                    </tr>
+                    <tr>
+                        <td>Low Price: {{ price.low }}</td>
+                        <td>Ask Price: {{ price.askPrice }}</td>
+                    </tr>
+                    <tr>
+                        <td>Open Price: {{ price.open }}</td>
+                        <td>Ask Size: {{ price.askSize }}</td>
+                    </tr>
+                    <tr>
+                        <td>Prev. Close: {{ price.last }}</td>
+                        <td>Bid Price: {{ price.bidPrice }}</td>
+                    </tr>
+                    <tr>
+                        <td>Volume: {{ price.volume }}</td>
+                        <td>Bid Size: {{ price.bidSize }}</td>
+                    </tr>
+                </table>
+                <h2><b>Company's Description</b></h2>
+                <p>Start Date: {{ summary.startDate }} </p>
+                <p>{{ summary.description }}</p>
+            </div>
+        </mat-tab>
+        <mat-tab label="Second"> Content 2 </mat-tab>
+        <mat-tab label="Third"> Content 3 </mat-tab>
+    </mat-tab-group>
 </div>
