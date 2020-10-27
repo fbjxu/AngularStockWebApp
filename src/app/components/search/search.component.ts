@@ -58,9 +58,4 @@ export class SearchComponent implements OnInit {
   }
 
   myControl = new FormControl();
-
-  // private _filter(value: string): string[] {
-  //   const filterValue = value.toLowerCase();
-  //   return this.objectOptions.filter(option => option.toLowerCase().includes(filterValue));
-  // }
 }

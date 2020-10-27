@@ -2,6 +2,7 @@
     <h2>{{ summary.ticker}} </h2>
     <h3>{{ summary.name}} </h3>
     <p>{{ summary.exchangeCode }}</p>
+    <app-daily-chart></app-daily-chart>
     <mat-tab-group mat-stretch-tabs>
         <mat-tab label="Summary">
             <div>
@@ -32,7 +33,7 @@
                 <p>{{ summary.description }}</p>
             </div>
         </mat-tab>
-        <mat-tab label="Second"> Content 2 </mat-tab>
-        <mat-tab label="Third"> Content 3 </mat-tab>
+        <mat-tab label="Top News"> </mat-tab>
+        <mat-tab label="Charts"> Content 3 </mat-tab>
     </mat-tab-group>
 </div>
