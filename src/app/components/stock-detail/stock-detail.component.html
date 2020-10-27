@@ -16,36 +16,45 @@
         </div>
     </div>
     
-    <app-daily-chart></app-daily-chart>
+    
     <mat-tab-group mat-stretch-tabs>
         <mat-tab label="Summary">
-            <div>
-                <table>
-                    <tr>
-                        <td>High Price: {{ price.high }}</td>
-                        <td>Mid Price: {{ price.mid }}</td>
-                    </tr>
-                    <tr>
-                        <td>Low Price: {{ price.low }}</td>
-                        <td>Ask Price: {{ price.askPrice }}</td>
-                    </tr>
-                    <tr>
-                        <td>Open Price: {{ price.open }}</td>
-                        <td>Ask Size: {{ price.askSize }}</td>
-                    </tr>
-                    <tr>
-                        <td>Prev. Close: {{ price.last }}</td>
-                        <td>Bid Price: {{ price.bidPrice }}</td>
-                    </tr>
-                    <tr>
-                        <td>Volume: {{ price.volume }}</td>
-                        <td>Bid Size: {{ price.bidSize }}</td>
-                    </tr>
-                </table>
-                <h2><b>Company's Description</b></h2>
-                <p>Start Date: {{ summary.startDate }} </p>
-                <p>{{ summary.description }}</p>
-            </div>
+            <ng-template matTabContent>
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>High Price: {{ price.high }}</td>
+                                    <td>Mid Price: {{ price.mid }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Low Price: {{ price.low }}</td>
+                                    <td>Ask Price: {{ price.askPrice }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Open Price: {{ price.open }}</td>
+                                    <td>Ask Size: {{ price.askSize }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Prev. Close: {{ price.last }}</td>
+                                    <td>Bid Price: {{ price.bidPrice }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Volume: {{ price.volume }}</td>
+                                    <td>Bid Size: {{ price.bidSize }}</td>
+                                </tr>
+                            </table>
+                            <h2><b>Company's Description</b></h2>
+                            <p>Start Date: {{ summary.startDate }} </p>
+                            <p>{{ summary.description }}</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <app-daily-chart></app-daily-chart>
+                    </div>
+                </div>
+            </ng-template>
         </mat-tab>
         <mat-tab label="Top News"> </mat-tab>
         <mat-tab label="Charts"> Content 3 </mat-tab>
