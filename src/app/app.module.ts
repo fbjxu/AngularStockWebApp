@@ -20,7 +20,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatTabsModule} from '@angular/material/tabs';
 import { DailyChartComponent } from './components/daily-chart/daily-chart.component';
-import { WatchlistDetailComponent } from './components/watchlist-detail/watchlist-detail.component';
 
 
 @NgModule({
@@ -32,8 +31,7 @@ import { WatchlistDetailComponent } from './components/watchlist-detail/watchlis
     WatchlistComponent,
     MainComponent,
     StockDetailComponent,
-    DailyChartComponent,
-    WatchlistDetailComponent
+    DailyChartComponent
   ],
   imports: [
     BrowserModule,
