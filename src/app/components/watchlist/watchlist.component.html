@@ -1,7 +1,7 @@
 
 <div *ngIf="showWatchList" class="container" >
     <h1>My Watchlist</h1>
-    <div *ngFor="let item of myWatchListDisplay" class ="stock-card card">
+    <div *ngFor="let item of myWatchListDisplay" class ="stock-card card" (click) ="onClick(item.ticker)">
         <div class="row first-row">
             <div class="col-md-6 text-start">{{ item.ticker }}</div>
             <div class="col-md-6 text-end" [ngClass]="{

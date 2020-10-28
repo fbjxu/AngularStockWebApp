@@ -1,6 +1,6 @@
 
 h1 {
-    font-size: 60px;
+    font-size: 50px;
     font-weight: bold;
     margin: 2%;
 }
@@ -20,18 +20,12 @@ h1 {
 
 .second-row {
     margin: 2%;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .stock-card {
     margin-bottom: 2%;
+    cursor: pointer; 
 }
 
-.positive {
-    color: green;
-}
-
-.negative {
-    color: red;
-}
 

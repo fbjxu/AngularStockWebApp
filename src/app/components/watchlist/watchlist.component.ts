@@ -6,6 +6,7 @@ import {SpinnerService } from '../../services/spinner.service';
 import { tickerPrice } from '../../models/tickerPrice';
 import { watchListDisplayItem } from '../../models/watchListDisplayItem';
 import { watchListStock } from '../../models/watchListStock';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
   showWatchList = false;
 
   constructor(
+    public router: Router,
     public dataService:DataServiceService,
     public watchlistmanager:WatchlistmanagerService,
     public componentLayoutService:ComponentLayoutServiceService,
@@ -55,6 +57,10 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.spinnerService.invisible();
     this.showWatchList = true;
+  }
+
+  onClick(ticker:string) {
+    this.router.navigate(["details/",ticker])
   }
 
 }
