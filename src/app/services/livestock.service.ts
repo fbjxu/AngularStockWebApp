@@ -9,6 +9,7 @@ import { liveStockInfo } from '../models/liveStockInfo';
 
 import { DataServiceService } from './data-service.service';
 
+const refreshInterval = 150000;//remember to change to 15s
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,13 @@ export class LivestockService {
 
   constructor(private dataService: DataServiceService) { 
   }
+
+  public liveStockServiceInit(ticker: string) {
+    this.beginningLook(ticker);
+    this.reFreshPrice(ticker);
+  }
   
-  public lookUpSummary(ticker:string) { //used to grab company summary
+  public beginningLook(ticker:string) { //used to grab company summary
     var summaryObserve:Observable<companySummary>;
     var priceSummaryObserve: Observable<tickerPrice>;
     var dailyPriceObserve: Observable<dailyPrice[]>;
@@ -76,7 +82,7 @@ export class LivestockService {
   }
 
   public reFreshPrice(ticker:string) {//repeatly request live stock info
-    const source = interval(15000); //set interval to 15s
+    const source = interval(refreshInterval); //set interval to 15s
     this.subscription = source.pipe(startWith(0)).subscribe(val=> {
       this.dataService.getDailyChart(ticker).subscribe(
         dailyChartData=>{
