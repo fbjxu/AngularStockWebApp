@@ -11,6 +11,8 @@ import { tickerPrice } from '../models/tickerPrice';
 import { autoCompleteEntry } from '../models/autoCompleteEntry';
 import { dailyPrice } from '../models/dailyPrice';
 
+const retryTimer = 5000;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,27 +35,54 @@ export class DataServiceService {
       retryWhen(errors =>
         errors.pipe(
           // Retry the query again in 1 sec
-          delayWhen(val => timer(10000))
+          delayWhen(val => timer(retryTimer))
         )
       )  
     );
   }
 
   public getPrice(ticker: string): Observable<tickerPrice> {
-    let observable: Observable<tickerPrice>;
-    observable = this.http.get<tickerPrice>('http://localhost:80/api/pricesummary/'+ticker);
-    return observable;
+    
+    return this.http.get<tickerPrice>('http://localhost:80/api/pricesummary/'+ticker).pipe(
+      map(res => {
+        let result: tickerPrice;
+        result =res;
+        return result;
+      }),
+      retryWhen(errors =>
+        errors.pipe(
+          // Retry the query again in 0.5 sec
+          delayWhen(val => timer(retryTimer))
+        )
+      )
+    );
   }
 
   public getAutoComplete(input: string): Observable<autoCompleteEntry[]> {
-    let observable: Observable<autoCompleteEntry[]>;
-    observable = this.http.get<autoCompleteEntry[]>('http://localhost:80/api/autocomplete/'+input);
-    return observable;
+
+    return this.http.get<autoCompleteEntry[]>('http://localhost:80/api/autocomplete/'+input).pipe(
+      map(res => {
+        let result: autoCompleteEntry[];
+        result =res;
+        return result;
+      })
+    );
   }
 
   public getDailyChart(ticker: string): Observable<dailyPrice[]> {
     let observable: Observable<dailyPrice[]>;
-    observable = this.http.get<dailyPrice[]>('http://localhost:80/api/dailychartsummary/'+ticker);
-    return observable;
+    return this.http.get<dailyPrice[]>('http://localhost:80/api/dailychartsummary/'+ticker).pipe(
+      map(res => {
+        let result: dailyPrice[];
+        result =res;
+        return result;
+      }),
+      retryWhen(errors =>
+        errors.pipe(
+          // Retry the query again in 0.5 sec
+          delayWhen(val => timer(retryTimer))
+        )
+      )
+    );
   }
 }

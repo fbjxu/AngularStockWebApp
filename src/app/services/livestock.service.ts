@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Data } from '@angular/router';
 import { Observable, interval, Subscription } from 'rxjs';
-import { retryWhen } from 'rxjs/operators';
 import { startWith } from 'rxjs/operators';
 import { dailyPrice } from '../models/dailyPrice';
 import { tickerPrice } from '../models/tickerPrice';
