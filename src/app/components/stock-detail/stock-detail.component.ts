@@ -6,10 +6,6 @@ import { LivestockService } from '../../services/livestock.service';
 
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { WatchlistmanagerService } from '../../services/watchlistmanager.service';
-import { Observable, interval, Subscription } from 'rxjs';
-import { companySummary } from 'src/app/models/companySummary';
-import { tickerPrice } from 'src/app/models/tickerPrice';
-import { dailyPrice } from 'src/app/models/dailyPrice';
 
 @Component({
   selector: 'app-stock-detail',

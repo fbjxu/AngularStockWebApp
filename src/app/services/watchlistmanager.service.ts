@@ -17,6 +17,15 @@ export class WatchlistmanagerService {
     let watchlist = this.getWatchList();
   }
 
+  public yellowStar(ticker:string):boolean {
+    var watchlistItems = this.getWatchList();
+    for(let stock of watchlistItems) {
+      if (stock.ticker.toLowerCase() == ticker.toLowerCase()) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   public getWatchList(): watchListStock[] {
     console.log("inside getWatchLIst");
@@ -58,4 +67,5 @@ export class WatchlistmanagerService {
     // console.log("ticker query"+ticker_query);
     return this.dataService.getPrice(ticker_query);
   }
+
 }

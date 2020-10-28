@@ -27,6 +27,7 @@ export class SearchComponent implements OnInit {
   constructor(
     private dataService:DataServiceService,
     private router: Router, public componentLayoutService: ComponentLayoutServiceService) { 
+      this.showAutoLoading = false;
   }
 
   ngOnInit(): void {
