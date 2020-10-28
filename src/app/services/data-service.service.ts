@@ -24,9 +24,19 @@ export class DataServiceService {
 
   //get summary method
   public getSummary(ticker: string): Observable<companySummary> {
-    let observable: Observable<companySummary>;
-    observable = this.http.get<companySummary>('http://localhost:80/api/summary/'+ticker);
-    return observable;
+    return this.http.get<companySummary>('http://localhost:80/api/summary/'+ticker).pipe(
+      map(res => {
+          let result: companySummary;
+          result = res;
+          return result;
+      }),
+      retryWhen(errors =>
+        errors.pipe(
+          // Retry the query again in 1 sec
+          delayWhen(val => timer(10000))
+        )
+      )  
+    );
   }
 
   public getPrice(ticker: string): Observable<tickerPrice> {

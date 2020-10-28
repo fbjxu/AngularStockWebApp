@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Data } from '@angular/router';
 import { Observable, interval, Subscription } from 'rxjs';
+import { retryWhen } from 'rxjs/operators';
 import { startWith } from 'rxjs/operators';
 import { dailyPrice } from '../models/dailyPrice';
 import { tickerPrice } from '../models/tickerPrice';
@@ -17,33 +18,6 @@ export class LivestockService {
   subscription: Subscription;
   dailyChartRawData: dailyPrice[];
   liveStockData:liveStockInfo = new liveStockInfo();
-  //summary
-  // ticker:string;
-  // name:string;
-  // exchangeCode:string;
-
-  // //price
-  // high:number;
-  // mid: number;
-  // low: number;
-  // askPrice: number;
-  // open: number;
-  // askSize: number
-  // prevClose: number;
-  // bidPrice: number;
-  // volume: number;
-  // bidSize:number
-  
-  // //latest
-  // openPrice: number; //open price for the ticker
-  // lastPrice: number;
-  
-  // //live stock price
-  // livePrice: string;
-  // liveDiff: string;
-  // liveDiffPercent: string;
-  // livePriceUp:boolean = true;
-  // liveTime: string;
 
   constructor(private dataService: DataServiceService) { 
   }
