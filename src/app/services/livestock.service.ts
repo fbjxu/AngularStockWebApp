@@ -5,26 +5,45 @@ import { startWith } from 'rxjs/operators';
 import { dailyPrice } from '../models/dailyPrice';
 import { tickerPrice } from '../models/tickerPrice';
 import { companySummary } from '../models/companySummary';
+import { liveStockInfo } from '../models/liveStockInfo';
+
 import { DataServiceService } from './data-service.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LivestockService {
-
-
-  summary: companySummary;
-  price: tickerPrice;
-  openPrice: number; //open price for the ticker
-  lastPrice: number;
   subscription: Subscription;
   dailyChartRawData: dailyPrice[];
-  //live stock price
-  livePrice: string;
-  liveDiff: string;
-  liveDiffPercent: string;
-  livePriceUp:boolean = true;
-  liveTime: string;
+  liveStockData:liveStockInfo = new liveStockInfo();
+  //summary
+  // ticker:string;
+  // name:string;
+  // exchangeCode:string;
+
+  // //price
+  // high:number;
+  // mid: number;
+  // low: number;
+  // askPrice: number;
+  // open: number;
+  // askSize: number
+  // prevClose: number;
+  // bidPrice: number;
+  // volume: number;
+  // bidSize:number
+  
+  // //latest
+  // openPrice: number; //open price for the ticker
+  // lastPrice: number;
+  
+  // //live stock price
+  // livePrice: string;
+  // liveDiff: string;
+  // liveDiffPercent: string;
+  // livePriceUp:boolean = true;
+  // liveTime: string;
 
   constructor(private dataService: DataServiceService) { 
   }
@@ -35,30 +54,48 @@ export class LivestockService {
     var dailyPriceObserve: Observable<dailyPrice[]>;
 
     summaryObserve = this.dataService.getSummary(ticker);
-    summaryObserve.subscribe(summaryData => this.summary = summaryData);
+    summaryObserve.subscribe(summaryData => 
+      {//get summary
+        this.liveStockData.ticker = summaryData.ticker;
+        this.liveStockData.name = summaryData.name;
+        this.liveStockData.exchangeCode = summaryData.exchangeCode;
+        this.liveStockData.description = summaryData.description;
+        this.liveStockData.startDate = summaryData.startDate;
+      });
 
     priceSummaryObserve = this.dataService.getPrice(ticker);
     priceSummaryObserve.subscribe(priceData=>{
-      this.price = priceData[0];//the response is an array
-      this.openPrice=this.price.open;
+      //get openPrice
+      var price = priceData[0];//the response is an array of length 1
+      this.liveStockData.high = price.high;
+      this.liveStockData.mid = price.mid;
+      this.liveStockData.low = price.low;
+      this.liveStockData.askPrice = price.askPrice;
+      this.liveStockData.open = price.open
+      this.liveStockData.askSize = price.askSize;
+      this.liveStockData.prevClose = price.prevClose;
+      this.liveStockData.bidPrice = price.bidPrice;
+      this.liveStockData.volume = price.volume;
+      this.liveStockData.bidSize = price.bidSize;
+      this.liveStockData.openPrice= price.open
     });
 
     dailyPriceObserve = this.dataService.getDailyChart(ticker);
     dailyPriceObserve.subscribe(dailyChartData=>{
         this.dailyChartRawData = dailyChartData;
         var livePrice = this.dailyChartRawData[dailyChartData.length-1].close;
-        var liveDiff = livePrice - this.openPrice;
-        var liveDiffPercent = liveDiff / this.openPrice;
-        this.livePrice = livePrice.toFixed(2);
-        this.liveDiff = liveDiff.toFixed(2);
-        this.liveDiffPercent = "%"+(liveDiffPercent*100).toFixed(2);
+        var liveDiff = livePrice - this.liveStockData.openPrice;
+        var liveDiffPercent = liveDiff / this.liveStockData.openPrice;
+        this.liveStockData.livePrice = livePrice.toFixed(2);
+        this.liveStockData.liveDiff = liveDiff.toFixed(2);
+        this.liveStockData.liveDiffPercent = "%"+(liveDiffPercent*100).toFixed(2);
         //time
         var liveTime = this.dailyChartRawData[dailyChartData.length-1].date;
-        this.liveTime = liveTime;
+        this.liveStockData.liveTime = liveTime;
         if(liveDiff>=0) {
-          this.livePriceUp=true;
+          this.liveStockData.livePriceUp=true;
         } else {
-          this.livePriceUp=false;
+          this.liveStockData.livePriceUp=false;
         }
         console.log(dailyChartData[dailyChartData.length-1]);
       }
@@ -72,14 +109,14 @@ export class LivestockService {
         dailyChartData=>{
           this.dailyChartRawData = dailyChartData;
           var livePrice = this.dailyChartRawData[dailyChartData.length-1].close;
-          var liveDiff = livePrice - this.openPrice;
-          var liveDiffPercent = liveDiff / this.openPrice;
-          this.livePrice = livePrice.toFixed(2);
-          this.liveDiff = liveDiff.toFixed(2);
-          this.liveDiffPercent = "%"+(liveDiffPercent*100).toFixed(2);
+          var liveDiff = livePrice - this.liveStockData.openPrice;
+          var liveDiffPercent = liveDiff / this.liveStockData.openPrice;
+          this.liveStockData.livePrice = livePrice.toFixed(2);
+          this.liveStockData.liveDiff = liveDiff.toFixed(2);
+          this.liveStockData.liveDiffPercent = "%"+(liveDiffPercent*100).toFixed(2);
           //time
           var liveTime = this.dailyChartRawData[dailyChartData.length-1].date;
-          this.liveTime = liveTime;
+          this.liveStockData.liveTime = liveTime;
           console.log(dailyChartData[dailyChartData.length-1]);
         }
       )
