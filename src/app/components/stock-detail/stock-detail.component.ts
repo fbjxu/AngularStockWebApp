@@ -5,6 +5,7 @@ import { DataServiceService } from 'src/app/services/data-service.service';
 import { LivestockService } from '../../services/livestock.service';
 
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { WatchlistmanagerService } from '../../services/watchlistmanager.service';
 import { Observable, interval, Subscription } from 'rxjs';
 import { companySummary } from 'src/app/models/companySummary';
 import { tickerPrice } from 'src/app/models/tickerPrice';
@@ -19,24 +20,14 @@ import { dailyPrice } from 'src/app/models/dailyPrice';
 export class StockDetailComponent implements AfterViewInit, OnInit {
 
   ticker: string;
-  summary: companySummary;
-  price: tickerPrice;
-  openPrice: number; //open price for the ticker
-  lastPrice: number;
   showSummary: boolean = false;
-  subscription: Subscription;
-  dailyChartRawData: dailyPrice[];
-  //live stock price
-  livePrice: string;
-  liveDiff: string;
-  liveDiffPercent: string;
-  livePriceUp:boolean = true;
-  liveTime: string;
+  yellowStar=false;
 
   refreshRate:number = 15000; //divide 1000 to
 
   //stock info
   constructor(
+    private watchlistmanager:WatchlistmanagerService,
     private livestockService: LivestockService,
     private route: ActivatedRoute, public componentLayoutService:ComponentLayoutServiceService, 
     private dataService: DataServiceService, private spinnerService:SpinnerService) { 
@@ -47,6 +38,19 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
     this.livestockService.lookUpSummary(this.ticker); //do not start look for data untill ticker is set
     this.livestockService.reFreshPrice(this.ticker);
   }
+
+  toggleStar() {
+    this.yellowStar = !this.yellowStar;
+  }
+
+  addTicker() {
+    this.watchlistmanager.addTicker(this.ticker);
+  }
+
+  deleteTicker() {
+    this.watchlistmanager.deleteTicker(this.ticker);
+  }
+
 
   // private lookUpSummary() { //used to grab company summary
   //   var summaryObserve:Observable<companySummary>;
