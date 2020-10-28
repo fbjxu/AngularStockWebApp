@@ -28,4 +28,8 @@ h1 {
     cursor: pointer; 
 }
 
-
+.close-icon {
+    position: absolute;
+    top: 2%;
+    right: 1%;
+}
