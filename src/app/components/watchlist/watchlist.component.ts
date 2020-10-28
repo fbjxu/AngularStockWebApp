@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentLayoutServiceService } from 'src/app/services/component-layout-service.service';
 import { WatchlistmanagerService } from '../../services/watchlistmanager.service';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { watchListStock } from '../../models/watchListStock';
 
 @Component({
   selector: 'app-watchlist',
@@ -9,17 +10,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./watchlist.component.css']
 })
 export class WatchlistComponent implements OnInit {
-  currentList: string[];
-  currentObserve: Observable<string[]>;
-  
+  currentList: string[] = [];
+
   constructor(
-    private watchlistmanager:WatchlistmanagerService,
+    public watchlistmanager:WatchlistmanagerService,
     public componentLayoutService:ComponentLayoutServiceService) { 
     this.componentLayoutService.makeInvisible();
   }
 
   ngOnInit(): void {
-    this.currentList = this.watchlistmanager._watchlist;
   }
 
 }

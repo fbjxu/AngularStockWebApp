@@ -1,7 +1,7 @@
 
 <div class="container">
-    <div>
-        {{ watchlistmanager._watchlist }}
+    <div *ngFor="let stock of watchlistmanager.getWatchList()">
+        {{ stock.ticker }}
     </div>
 </div>
 
