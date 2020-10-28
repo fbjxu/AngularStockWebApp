@@ -47,7 +47,7 @@ export class WatchlistmanagerService {
 
   public deleteTicker(ticker_input:string) {
     let watchlist = this.getWatchList();
-    watchlist = watchlist.filter(item => item.ticker != ticker_input);
+    watchlist = watchlist.filter(item => item.ticker.toLowerCase() != ticker_input.toLowerCase());
     this.setLocalStorageWatchList(watchlist);
     console.log(watchlist);
   }
