@@ -41,18 +41,19 @@ export class DataServiceService {
     );
   }
 
-  public getPrice(ticker: string): Observable<tickerPrice> {
+  public getPrice(ticker: string): Observable<tickerPrice[]> {
     
-    return this.http.get<tickerPrice>('http://localhost:80/api/pricesummary/'+ticker).pipe(
+    return this.http.get<tickerPrice[]>('http://localhost:80/api/pricesummary/'+ticker).pipe(
       map(res => {
-        let result: tickerPrice;
+        let result: tickerPrice[];
         result =res;
         return result;
       }),
       retryWhen(errors =>
         errors.pipe(
           // Retry the query again in 0.5 sec
-          delayWhen(val => timer(retryTimer))
+          delayWhen(val => timer(retryTimer)),
+
         )
       )
     );
@@ -75,6 +76,23 @@ export class DataServiceService {
       map(res => {
         let result: dailyPrice[];
         result =res;
+        return result;
+      }),
+      retryWhen(errors =>
+        errors.pipe(
+          // Retry the query again in 0.5 sec
+          delayWhen(val => timer(retryTimer))
+        )
+      )
+    );
+  }
+
+  public oneTimeLivePrices(tickers:string[]):Observable<tickerPrice[]>{
+    var ticker_query = tickers.join(",");
+    return  this.getPrice(ticker_query).pipe(
+      map(res => {
+        let result: tickerPrice[];
+        result = res;
         return result;
       }),
       retryWhen(errors =>

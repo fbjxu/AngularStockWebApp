@@ -31,7 +31,7 @@ export class LivestockService {
     console.log("inside beginning look");
     var summaryObserve:Observable<companySummary>;
     summaryObserve = this.dataService.getSummary(ticker);
-    summaryObserve.subscribe(summaryData => 
+    summaryObserve.subscribe((summaryData:companySummary) => 
       {//get summary
         this.liveStockData.ticker = summaryData.ticker;
         this.liveStockData.name = summaryData.name;
@@ -43,13 +43,13 @@ export class LivestockService {
 
   public reFreshPrice(ticker:string) {//repeatly request live stock info
     console.log("inside reFreshPrice");
-    var priceSummaryObserve: Observable<tickerPrice>;
+    var priceSummaryObserve: Observable<tickerPrice[]>;
     var dailyPriceObserve: Observable<dailyPrice[]>;
 
     const source = interval(refreshInterval); //set interval to 15s
     this.subscription = source.pipe(startWith(0)).subscribe(val=> {
       priceSummaryObserve = this.dataService.getPrice(ticker);
-      priceSummaryObserve.subscribe(priceData=>{
+      priceSummaryObserve.subscribe((priceData:tickerPrice[])=>{
         //get openPrice
         var price = priceData[0];//the response is an array of length 1
         this.liveStockData.high = price.high;
@@ -81,13 +81,14 @@ export class LivestockService {
         console.log("refreshed price: "+ price);
       });
     })
-
     // get daily chart
     dailyPriceObserve = this.dataService.getDailyChart(ticker);
     dailyPriceObserve.subscribe(dailyChartData=>{
         this.dailyChartRawData = dailyChartData;
-        console.log("obtained daily Chart data");
+        console.log("obtained daily Chart data"+this.dailyChartRawData);
       }
     )
   }
+
+
 }
