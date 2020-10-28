@@ -18,6 +18,7 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
   myWatchList:watchListStock[];
   myStockList: tickerPrice[];
   myWatchListDisplay: watchListDisplayItem[] = [];
+  showWatchList = false;
 
   constructor(
     public dataService:DataServiceService,
@@ -53,6 +54,7 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.spinnerService.invisible();
+    this.showWatchList = true;
   }
 
 }

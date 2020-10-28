@@ -1,0 +1,37 @@
+
+h1 {
+    font-size: 60px;
+    font-weight: bold;
+    margin: 2%;
+}
+
+.text-end {
+    text-align: end;
+}
+
+.text-start {
+    text-align: start;
+}
+
+.first-row {
+    margin: 2%;
+    font-size: 40px;
+}
+
+.second-row {
+    margin: 2%;
+    font-size: 20px;
+}
+
+.stock-card {
+    margin-bottom: 2%;
+}
+
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
+
