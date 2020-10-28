@@ -65,6 +65,9 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
 
   removeTicker(ticker:string) {
     this.watchlistmanager.deleteTicker(ticker);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/watchlist']);
+  }); 
   }
 
 }
