@@ -9,7 +9,7 @@ import { liveStockInfo } from '../models/liveStockInfo';
 
 import { DataServiceService } from './data-service.service';
 
-const refreshInterval = 150000;//remember to change to 15s
+const refreshInterval = 15000;//remember to change to 15s
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +28,8 @@ export class LivestockService {
   }
   
   public beginningLook(ticker:string) { //used to grab company summary
+    console.log("inside beginning look");
     var summaryObserve:Observable<companySummary>;
-    var priceSummaryObserve: Observable<tickerPrice>;
-    var dailyPriceObserve: Observable<dailyPrice[]>;
-
     summaryObserve = this.dataService.getSummary(ticker);
     summaryObserve.subscribe(summaryData => 
       {//get summary
@@ -41,64 +39,55 @@ export class LivestockService {
         this.liveStockData.description = summaryData.description;
         this.liveStockData.startDate = summaryData.startDate;
       });
+  }
 
-    priceSummaryObserve = this.dataService.getPrice(ticker);
-    priceSummaryObserve.subscribe(priceData=>{
-      //get openPrice
-      var price = priceData[0];//the response is an array of length 1
-      this.liveStockData.high = price.high;
-      this.liveStockData.mid = price.mid;
-      this.liveStockData.low = price.low;
-      this.liveStockData.askPrice = price.askPrice;
-      this.liveStockData.open = price.open
-      this.liveStockData.askSize = price.askSize;
-      this.liveStockData.prevClose = price.prevClose;
-      this.liveStockData.bidPrice = price.bidPrice;
-      this.liveStockData.volume = price.volume;
-      this.liveStockData.bidSize = price.bidSize;
-      this.liveStockData.openPrice= price.open
-    });
+  public reFreshPrice(ticker:string) {//repeatly request live stock info
+    console.log("inside reFreshPrice");
+    var priceSummaryObserve: Observable<tickerPrice>;
+    var dailyPriceObserve: Observable<dailyPrice[]>;
 
-    dailyPriceObserve = this.dataService.getDailyChart(ticker);
-    dailyPriceObserve.subscribe(dailyChartData=>{
-        this.dailyChartRawData = dailyChartData;
-        var livePrice = this.dailyChartRawData[dailyChartData.length-1].close;
-        var liveDiff = livePrice - this.liveStockData.openPrice;
-        var liveDiffPercent = liveDiff / this.liveStockData.openPrice;
-        this.liveStockData.livePrice = livePrice.toFixed(2);
+    const source = interval(refreshInterval); //set interval to 15s
+    this.subscription = source.pipe(startWith(0)).subscribe(val=> {
+      priceSummaryObserve = this.dataService.getPrice(ticker);
+      priceSummaryObserve.subscribe(priceData=>{
+        //get openPrice
+        var price = priceData[0];//the response is an array of length 1
+        this.liveStockData.high = price.high;
+        this.liveStockData.mid = price.mid;
+        this.liveStockData.low = price.low;
+        this.liveStockData.askPrice = price.askPrice;
+        this.liveStockData.open = price.open
+        this.liveStockData.askSize = price.askSize;
+        this.liveStockData.prevClose = price.prevClose;
+        this.liveStockData.bidPrice = price.bidPrice;
+        this.liveStockData.volume = price.volume;
+        this.liveStockData.bidSize = price.bidSize;
+        this.liveStockData.openPrice= price.open;
+        this.liveStockData.last= price.last;
+        var liveDiff = this.liveStockData.last - this.liveStockData.prevClose; //change = last - prevClose
+        var liveDiffPercent = liveDiff / this.liveStockData.prevClose;
+        //calculate the displayed stock price numbers
+        this.liveStockData.livePrice = this.liveStockData.last.toFixed(2); //livePrice is last
         this.liveStockData.liveDiff = liveDiff.toFixed(2);
         this.liveStockData.liveDiffPercent = "%"+(liveDiffPercent*100).toFixed(2);
-        //time
-        var liveTime = this.dailyChartRawData[dailyChartData.length-1].date;
+        //timestamp
+        var liveTime = price.timestamp;
         this.liveStockData.liveTime = liveTime;
         if(liveDiff>=0) {
           this.liveStockData.livePriceUp=true;
         } else {
           this.liveStockData.livePriceUp=false;
         }
-        console.log(dailyChartData[dailyChartData.length-1]);
+        console.log("refreshed price: "+ price);
+      });
+    })
+
+    // get daily chart
+    dailyPriceObserve = this.dataService.getDailyChart(ticker);
+    dailyPriceObserve.subscribe(dailyChartData=>{
+        this.dailyChartRawData = dailyChartData;
+        console.log("obtained daily Chart data");
       }
     )
-  }
-
-  public reFreshPrice(ticker:string) {//repeatly request live stock info
-    const source = interval(refreshInterval); //set interval to 15s
-    this.subscription = source.pipe(startWith(0)).subscribe(val=> {
-      this.dataService.getDailyChart(ticker).subscribe(
-        dailyChartData=>{
-          this.dailyChartRawData = dailyChartData;
-          var livePrice = this.dailyChartRawData[dailyChartData.length-1].close;
-          var liveDiff = livePrice - this.liveStockData.openPrice;
-          var liveDiffPercent = liveDiff / this.liveStockData.openPrice;
-          this.liveStockData.livePrice = livePrice.toFixed(2);
-          this.liveStockData.liveDiff = liveDiff.toFixed(2);
-          this.liveStockData.liveDiffPercent = "%"+(liveDiffPercent*100).toFixed(2);
-          //time
-          var liveTime = this.dailyChartRawData[dailyChartData.length-1].date;
-          this.liveStockData.liveTime = liveTime;
-          console.log(dailyChartData[dailyChartData.length-1]);
-        }
-      )
-    })
   }
 }

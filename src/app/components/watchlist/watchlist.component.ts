@@ -10,7 +10,7 @@ import { watchListStock } from '../../models/watchListStock';
   styleUrls: ['./watchlist.component.css']
 })
 export class WatchlistComponent implements OnInit {
-  currentList: string[] = [];
+  
 
   constructor(
     public watchlistmanager:WatchlistmanagerService,

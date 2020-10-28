@@ -25,7 +25,7 @@ export class WatchlistmanagerService {
       stockList.push(stock.ticker);
     }
     var stocklistquery = stockList.join(",");
-
+    
     return localStorageItem.watchlist;
   }
   

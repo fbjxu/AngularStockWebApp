@@ -18,8 +18,9 @@ export class liveStockInfo {
   askSize: number
   prevClose: number;
   bidPrice: number;
-  volume: number;
+  volume: bigint;
   bidSize:number
+  last:number;
   
   //live stock price
   openPrice: number; //open price for the ticker

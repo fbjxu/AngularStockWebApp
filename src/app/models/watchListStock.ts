@@ -6,6 +6,6 @@ export class watchListStock {
 
     constructor(ticker:string, name:string) {
         this.ticker = ticker;
-        this.name = ticker;
+        this.name = name;
     }
 }
