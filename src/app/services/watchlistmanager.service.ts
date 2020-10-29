@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, timer, empty } from 'rxjs';
+import { Observable, timer, Subject } from 'rxjs';
 import { tickerPrice } from '../models/tickerPrice';
 import { map, retryWhen, delayWhen} from 'rxjs/operators';
 import { watchListStock } from '../models/watchListStock';
@@ -12,6 +12,7 @@ export class WatchlistmanagerService {
   // private watchlist:watchListStock[];
   // public watchListChange: Subject<string[]> = new Subject<string[]>();//init to empty
   public myStockList:tickerPrice[];
+  public isYellowStar$:Subject<boolean> = new Subject<boolean>();
 
   constructor(private dataService:DataServiceService) { 
     // let watchlist = this.getWatchList();
@@ -21,10 +22,14 @@ export class WatchlistmanagerService {
     var watchlistItems = this.getWatchList();
     for(let stock of watchlistItems) {
       if (stock.ticker.toLowerCase() == ticker.toLowerCase()) {
-        return true;
+        return true
       }
     }
     return false;
+  }
+
+  public getYellowStar():Observable<boolean> {
+    return this.isYellowStar$;
   }
 
   public getWatchList(): watchListStock[] {
@@ -42,6 +47,7 @@ export class WatchlistmanagerService {
     let watchlist = this.getWatchList();
     watchlist.push(newWatchListItem);
     this.setLocalStorageWatchList(watchlist);
+    this.isYellowStar$.next(true);
     console.log(watchlist);
   }
 
@@ -49,6 +55,7 @@ export class WatchlistmanagerService {
     let watchlist = this.getWatchList();
     watchlist = watchlist.filter(item => item.ticker.toLowerCase() != ticker_input.toLowerCase());
     this.setLocalStorageWatchList(watchlist);
+    this.isYellowStar$.next(false);
     console.log(watchlist);
   }
 

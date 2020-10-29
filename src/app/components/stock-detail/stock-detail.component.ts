@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ComponentLayoutServiceService } from 'src/app/services/component-layout-service.service';
 import { DataServiceService } from 'src/app/services/data-service.service';
 import { LivestockService } from '../../services/livestock.service';
-
+import { startWith } from 'rxjs/operators';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { WatchlistmanagerService } from '../../services/watchlistmanager.service';
 
@@ -17,7 +17,7 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
 
   ticker: string;
   showSummary: boolean = false;
-  yellowStar=false;
+  yellowStar;
 
   refreshRate:number = 15000; //divide 1000 to
 
@@ -31,6 +31,11 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
     this.componentLayoutService.makeInvisible(); //make search section disappear
     this.ticker = this.route.snapshot.params['ticker']; //set ticker
     this.livestockService.liveStockServiceInit(this.ticker);
+    this.yellowStar = this.watchlistmanager.yellowStar(this.ticker);
+    console.log(this.yellowStar);
+    this.watchlistmanager.getYellowStar().
+      subscribe(starData =>this.yellowStar = starData
+    )
   }
 
   toggleStar() {
