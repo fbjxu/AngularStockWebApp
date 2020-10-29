@@ -17,39 +17,38 @@ const refreshInterval = 15000;//remember to change to 15s
 export class LivestockService {
   subscription: Subscription;
   dailyChartRawData: dailyPrice[];
-  liveStockData:liveStockInfo = new liveStockInfo();
+  liveStockData: liveStockInfo = new liveStockInfo();
 
-  constructor(private dataService: DataServiceService) { 
+  constructor(private dataService: DataServiceService) {
   }
 
   public liveStockServiceInit(ticker: string) {
     this.beginningLook(ticker);
     this.reFreshPrice(ticker);
   }
-  
-  public beginningLook(ticker:string) { //used to grab company summary
+
+  public beginningLook(ticker: string) { //used to grab company summary
     console.log("inside beginning look");
-    var summaryObserve:Observable<companySummary>;
+    var summaryObserve: Observable<companySummary>;
     summaryObserve = this.dataService.getSummary(ticker);
-    summaryObserve.subscribe((summaryData:companySummary) => 
-      {//get summary
-        this.liveStockData.ticker = summaryData.ticker;
-        this.liveStockData.name = summaryData.name;
-        this.liveStockData.exchangeCode = summaryData.exchangeCode;
-        this.liveStockData.description = summaryData.description;
-        this.liveStockData.startDate = summaryData.startDate;
-      });
+    summaryObserve.subscribe((summaryData: companySummary) => {//get summary
+      this.liveStockData.ticker = summaryData.ticker;
+      this.liveStockData.name = summaryData.name;
+      this.liveStockData.exchangeCode = summaryData.exchangeCode;
+      this.liveStockData.description = summaryData.description;
+      this.liveStockData.startDate = summaryData.startDate;
+    });
   }
 
-  public reFreshPrice(ticker:string) {//repeatly request live stock info
+  public reFreshPrice(ticker: string) {//repeatly request live stock info
     console.log("inside reFreshPrice");
     var priceSummaryObserve: Observable<tickerPrice[]>;
     var dailyPriceObserve: Observable<dailyPrice[]>;
 
     const source = interval(refreshInterval); //set interval to 15s
-    this.subscription = source.pipe(startWith(0)).subscribe(val=> {
+    this.subscription = source.pipe(startWith(0)).subscribe(val => {
       priceSummaryObserve = this.dataService.getPrice(ticker);
-      priceSummaryObserve.subscribe((priceData:tickerPrice[])=>{
+      priceSummaryObserve.subscribe((priceData: tickerPrice[]) => {
         //get openPrice
         var price = priceData[0];//the response is an array of length 1
         this.liveStockData.high = price.high;
@@ -62,23 +61,35 @@ export class LivestockService {
         this.liveStockData.bidPrice = price.bidPrice;
         this.liveStockData.volume = price.volume;
         this.liveStockData.bidSize = price.bidSize;
-        this.liveStockData.openPrice= price.open;
-        this.liveStockData.last= price.last;
+        this.liveStockData.openPrice = price.open;
+        this.liveStockData.last = price.last;
         var liveDiff = this.liveStockData.last - this.liveStockData.prevClose; //change = last - prevClose
         var liveDiffPercent = liveDiff / this.liveStockData.prevClose;
         //calculate the displayed stock price numbers
         this.liveStockData.livePrice = this.liveStockData.last.toFixed(2); //livePrice is last
         this.liveStockData.liveDiff = liveDiff.toFixed(2);
-        this.liveStockData.liveDiffPercent = "%"+(liveDiffPercent*100).toFixed(2);
+        this.liveStockData.liveDiffPercent = "%" + (liveDiffPercent * 100).toFixed(2);
         //timestamp
-        var liveTime = price.timestamp;
-        this.liveStockData.liveTime = liveTime;
-        if(liveDiff>=0) {
-          this.liveStockData.livePriceUp=true;
+        var liveTime = new Date(Date.parse(price.timestamp));
+        let date = ("0" + liveTime.getDate()).slice(-2);
+
+        // current month
+        let month = ("0" + (liveTime.getMonth() + 1)).slice(-2);
+        // current year
+        let year = liveTime.getFullYear();
+        // current hours
+        let hours = liveTime.getHours();
+        // current minutes
+        let minutes = liveTime.getMinutes();
+        // current seconds
+        let seconds = liveTime.getSeconds();
+        this.liveStockData.liveTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+        if (liveDiff >= 0) {
+          this.liveStockData.livePriceUp = true;
         } else {
-          this.liveStockData.livePriceUp=false;
+          this.liveStockData.livePriceUp = false;
         }
-        console.log("refreshed price: "+ JSON.stringify(price));
+        console.log("refreshed price: " + JSON.stringify(price));
       });
     })
   }
