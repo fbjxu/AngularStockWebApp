@@ -27,7 +27,7 @@ noData(Highcharts);
 
 export class DailyChartComponent implements OnInit {
   @Input() ticker:string;
-  @Input() open: string;
+  @Input() prevClose: string;
   price_series:any[];
   volume_series:any[];
   public options: any; 
@@ -68,7 +68,7 @@ export class DailyChartComponent implements OnInit {
             const updated_normal_data = [];
             const updated_abnormal_data = [];
             var latest_data = data[data.length-1];
-            if (latest_data.close>=parseFloat(this.open)) {
+            if (latest_data.close>=parseFloat(this.prevClose)) {
                 this.stockUp = "green";
             } 
             else{
