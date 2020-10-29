@@ -77,8 +77,6 @@ app.get('/api/news/:ticker', function (req, res) {
 });
 
 
-
-
 //Open port
 app.listen(80, function () {
 console.log('CORS- enabled web server listening on port 80')
