@@ -34,29 +34,34 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.myWatchList = this.watchlistmanager.getWatchList();
-    this.watchlistmanager.createMyStocklist().subscribe(data=>
-      {
-        this.myStockList = data;
-        for (let stock of data) {
-          var ticker = stock.ticker;
-          for (let watch of this.myWatchList) {
-            if (ticker.toLowerCase()==watch.ticker.toLowerCase()) {
-              var currPrice = stock.last.toFixed(2);
-              var change = (stock.last - stock.prevClose).toFixed(2);
-              var changePercent = "%"+ ((stock.last - stock.prevClose)*100/stock.prevClose).toFixed(2);
-              var watchListDisplayNewItem: watchListDisplayItem = new watchListDisplayItem(
-                watch.name, watch.ticker.toUpperCase(), currPrice, change, changePercent);
-              this.myWatchListDisplay.push(watchListDisplayNewItem);
+    
+      this.watchlistmanager.createMyStocklist().subscribe(data=>
+        {
+          this.myStockList = data;
+          for (let stock of data) {
+            var ticker = stock.ticker;
+            for (let watch of this.myWatchList) {
+              if (ticker.toLowerCase()==watch.ticker.toLowerCase()) {
+                var currPrice = stock.last.toFixed(2);
+                var change = (stock.last - stock.prevClose).toFixed(2);
+                var changePercent = "%"+ ((stock.last - stock.prevClose)*100/stock.prevClose).toFixed(2);
+                var watchListDisplayNewItem: watchListDisplayItem = new watchListDisplayItem(
+                  watch.name, watch.ticker.toUpperCase(), currPrice, change, changePercent);
+                  this.myWatchListDisplay.push(watchListDisplayNewItem);
+              }
             }
           }
-        }
-      }
-    );
+        },
+        err => console.log("there is an error")
+      );
+
+    
   }
 
   ngAfterViewInit() {
     this.spinnerService.invisible();
     this.showWatchList = true;
+    console.log(this.showWatchList);
   }
 
   onClick(ticker:string) {

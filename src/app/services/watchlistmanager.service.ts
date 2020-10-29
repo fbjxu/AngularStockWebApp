@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, timer } from 'rxjs';
+import { Observable, timer, empty } from 'rxjs';
 import { tickerPrice } from '../models/tickerPrice';
 import { map, retryWhen, delayWhen} from 'rxjs/operators';
 import { watchListStock } from '../models/watchListStock';
@@ -14,7 +14,7 @@ export class WatchlistmanagerService {
   public myStockList:tickerPrice[];
 
   constructor(private dataService:DataServiceService) { 
-    let watchlist = this.getWatchList();
+    // let watchlist = this.getWatchList();
   }
 
   public yellowStar(ticker:string):boolean {
@@ -63,7 +63,9 @@ export class WatchlistmanagerService {
     for (let watchStock of watchListItems) {
       stockList.push(watchStock.ticker);
     }
+    
     var ticker_query = stockList.join(",");
+    
     // console.log("ticker query"+ticker_query);
     return this.dataService.getPrice(ticker_query);
   }

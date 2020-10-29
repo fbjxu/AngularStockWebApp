@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // rxjs packages
 import { Observable, timer } from 'rxjs';
-import { map, retryWhen, delayWhen } from 'rxjs/operators';
+import { map, retryWhen, delayWhen, catchError } from 'rxjs/operators';
 
 // self-defined objects
 import { companySummary } from '../models/companySummary';
@@ -42,20 +42,20 @@ export class DataServiceService {
   }
 
   public getPrice(ticker: string): Observable<tickerPrice[]> {
-    
     return this.http.get<tickerPrice[]>('http://localhost:80/api/pricesummary/'+ticker).pipe(
       map(res => {
         let result: tickerPrice[];
         result =res;
         return result;
-      }),
-      retryWhen(errors =>
-        errors.pipe(
-          // Retry the query again in 0.5 sec
-          delayWhen(val => timer(retryTimer)),
+      })
+      // ,
+      // retryWhen(errors =>
+      //   errors.pipe(
+      //     // Retry the query again in 0.5 sec
+      //     delayWhen(val => timer(retryTimer)),
 
-        )
-      )
+      //   )
+      // )
     );
   }
 
