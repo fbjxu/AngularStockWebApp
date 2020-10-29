@@ -35,7 +35,8 @@
                 </span>
                 {{ livestockService.liveStockData.liveDiff }} ({{ livestockService.liveStockData.liveDiffPercent }}) 
             </h3>
-            <p>{{ livestockService.liveStockData.liveTime }} </p>
+            <p *ngIf="livestockService.liveStockData.bidPrice!=null">{{ livestockService.liveStockData.liveTime }} </p>
+            <p *ngIf="livestockService.liveStockData.bidPrice==null">{{ livestockService.liveStockData.requestTime }} </p>
         </div>
     </div>
     <div class="no-item" *ngIf="livestockService.liveStockData.bidPrice==null">
@@ -54,26 +55,26 @@
                             <table>
                                 <tr>
                                     <td>High Price: {{ livestockService.liveStockData.high }}</td>
-                                    <td>Mid Price: {{ livestockService.liveStockData.mid }}</td>
+                                    <td *ngIf="!livestockService.liveStockData.bidPrice==null">Mid Price: {{ livestockService.liveStockData.mid }}</td>
                                 </tr>
                                 <tr>
                                     <td>Low Price: {{ livestockService.liveStockData.low }}</td>
-                                    <td>Ask Price: {{ livestockService.liveStockData.askPrice }}</td>
+                                    <td *ngIf="!livestockService.liveStockData.bidPrice==null">Ask Price: {{ livestockService.liveStockData.askPrice }}</td>
                                 </tr>
                                 <tr>
                                     <td>Open Price: {{ livestockService.liveStockData.open }}</td>
-                                    <td>Ask Size: {{ livestockService.liveStockData.askSize }}</td>
+                                    <td *ngIf="!livestockService.liveStockData.bidPrice==null">Ask Size: {{ livestockService.liveStockData.askSize }}</td>
                                 </tr>
                                 <tr>
                                     <td>Prev. Close: {{ livestockService.liveStockData.prevClose }}</td>
-                                    <td>Bid Price: {{ livestockService.liveStockData.bidPrice }}</td>
+                                    <td *ngIf="!livestockService.liveStockData.bidPrice==null">Bid Price: {{ livestockService.liveStockData.bidPrice }}</td>
                                 </tr>
                                 <tr>
                                     <td>Volume: {{ livestockService.liveStockData.volume }}</td>
-                                    <td>Bid Size: {{ livestockService.liveStockData.bidSize }}</td>
+                                    <td *ngIf="!livestockService.liveStockData.bidPrice==null">Bid Size: {{ livestockService.liveStockData.bidSize }}</td>
                                 </tr>
                             </table>
-                            <h2><b>Company's Description</b></h2>
+                            <h2 id="company-description"><b>Company's Description</b></h2>
                             <p>Start Date: {{ livestockService.liveStockData.startDate }} </p>
                             <p>{{ livestockService.liveStockData.description }}</p>
                         </div>

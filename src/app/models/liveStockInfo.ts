@@ -30,5 +30,6 @@ export class liveStockInfo {
   liveDiffPercent: string;
   livePriceUp:boolean = true;
   liveTime: string;
+  requestTime:string;
 
 }

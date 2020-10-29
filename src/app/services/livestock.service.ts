@@ -71,19 +71,9 @@ export class LivestockService {
         this.liveStockData.liveDiffPercent = "%" + (liveDiffPercent * 100).toFixed(2);
         //timestamp
         var liveTime = new Date(Date.parse(price.timestamp));
-        let date = ("0" + liveTime.getDate()).slice(-2);
-
-        // current month
-        let month = ("0" + (liveTime.getMonth() + 1)).slice(-2);
-        // current year
-        let year = liveTime.getFullYear();
-        // current hours
-        let hours = liveTime.getHours();
-        // current minutes
-        let minutes = liveTime.getMinutes();
-        // current seconds
-        let seconds = liveTime.getSeconds();
-        this.liveStockData.liveTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+        var requestTime = new Date();
+        this.liveStockData.liveTime = this.getTime(liveTime);
+        this.liveStockData.requestTime = this.getTime(requestTime);
         if (liveDiff >= 0) {
           this.liveStockData.livePriceUp = true;
         } else {
@@ -92,6 +82,22 @@ export class LivestockService {
         console.log("refreshed price: " + JSON.stringify(price));
       });
     })
+  }
+
+  public getTime(date_input: Date):string {
+    let date = ("0" + date_input.getDate()).slice(-2);
+
+    // current month
+    let month = ("0" + (date_input.getMonth() + 1)).slice(-2);
+    // current year
+    let year = date_input.getFullYear();
+    // current hours
+    let hours = date_input.getHours();
+    // current minutes
+    let minutes = date_input.getMinutes();
+    // current seconds
+    let seconds = date_input.getSeconds();
+    return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
   }
 
 

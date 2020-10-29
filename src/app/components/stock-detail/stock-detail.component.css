@@ -1,3 +1,8 @@
 .mat-tab-labels {
     justify-content: center;
 }
+
+#company-description {
+    margin-top: 3%;
+    text-align: center;
+}
