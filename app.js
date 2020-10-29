@@ -8,6 +8,7 @@ app.use(cors());
 
 //helper attributes
 var token = "token=a4d9cb249227d4a1c64fac98783787069f17c866";
+var newstoken = "fd84f96ea1e248a29d8fa184296cdb8f";
 var today = getDate(new Date());
 
 //helper functions
@@ -65,6 +66,17 @@ app.get('/api/dailychartsummary/:ticker', function (req, res) {
     .then(res => res.json())
     .then(data=>{res.json(data)});
 });
+
+//API: News
+app.get('/api/news/:ticker', function (req, res) {
+    fetch("https://newsapi.org/v2/everything?q="+req.params.ticker+"&apiKey="+newstoken, {
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(data=>{res.json(data["articles"])});//only return articles
+});
+
+
 
 
 //Open port
