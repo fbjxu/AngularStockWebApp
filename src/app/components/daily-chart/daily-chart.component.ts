@@ -1,13 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { HttpClient } from '@angular/common/http';
+import { startWith } from 'rxjs/operators';
 import { interval, Subscription } from 'rxjs';
 import { LivestockService } from '../../services/livestock.service';
+import { dailyPrice } from '../../models/dailyPrice';
+
 
 declare var require: any;
 let Boost = require('highcharts/modules/boost');
 let noData = require('highcharts/modules/no-data-to-display');
 let More = require('highcharts/highcharts-more');
+var HighchartsStock = require('highcharts/highstock'); 
 
 Boost(Highcharts);
 noData(Highcharts);
@@ -23,27 +27,17 @@ noData(Highcharts);
 
 export class DailyChartComponent implements OnInit {
   @Input() ticker:string;
+  @Input() open: string;
   price_series:any[];
   volume_series:any[];
   public options: any; 
+  subscription: Subscription;
+  stockUp:string = "green";
+
   constructor(
       private livestockService:LivestockService,
       private http: HttpClient) { 
-      //Data prep
       
-  }
-
-  ngOnInit(){
-    var dailyData = this.livestockService.dailyChartRawData;
-    console.log("output daily chart daily data"+JSON.stringify(dailyData));
-      for (let dayData of dailyData) {
-        var time = Date.parse(dayData.date);
-        if(dayData.date!=null){
-            this.price_series.push([time, dayData.close]);
-        }
-      }
-      console.log("output price series" + JSON.stringify(this.price_series));
-
       //high chart graph
       this.options = {
 
@@ -57,14 +51,58 @@ export class DailyChartComponent implements OnInit {
 
         series: [{
             name: 'AAPL',
-            data: this.price_series,
+            data: [],
             tooltip: {
                 valueDecimals: 2
             },
-            color: 'red',
+            color: this.stockUp,
         }],
     }
-    Highcharts.chart('test', this.options);
+  }
+
+  ngOnInit(){
+    const source = interval(15000);//15 s refresh
+    this.subscription = source.pipe(startWith(0)).subscribe(val => this.getApiResponse(this.ticker).
+    then(
+        data => {
+            const updated_normal_data = [];
+            const updated_abnormal_data = [];
+            var latest_data = data[data.length-1];
+            if (latest_data.close>=parseFloat(this.open)) {
+                this.stockUp = "green";
+            } 
+            else{
+                this.stockUp = "red";
+            }
+            data.forEach(dayData => {
+                const temp_row = [
+                    Date.parse(dayData.date),
+                    dayData.close
+                ];
+                updated_normal_data.push(temp_row);
+            });
+            this.options.series[0]['data'] = updated_normal_data;
+            this.options.series[0]['color'] = this.stockUp;
+            HighchartsStock.stockChart('test', this.options);
+            },
+            error => {
+            console.log('Something went wrong.');
+            })
+    );
+    //   for (let dayData of dailyData) {
+    //     var time = Date.parse(dayData.date);
+    //     if(dayData.date!=null){
+    //         this.price_series.push([time, dayData.close]);
+    //     }
+    //   }
+      
+  }
+
+  getApiResponse(ticker:string) {
+      return this.http.get<dailyPrice[]>('http://localhost:80/api/dailychartsummary/'+ticker, {})
+      .toPromise().then(res => {
+          return res;
+      })
   }
 
 }

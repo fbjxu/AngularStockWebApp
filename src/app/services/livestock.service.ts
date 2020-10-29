@@ -81,13 +81,6 @@ export class LivestockService {
         console.log("refreshed price: "+ price);
       });
     })
-    // get daily chart
-    dailyPriceObserve = this.dataService.getDailyChart(ticker);
-    dailyPriceObserve.subscribe(dailyChartData=>{
-        this.dailyChartRawData = dailyChartData;
-        console.log("obtained daily Chart data"+JSON.stringify(this.dailyChartRawData));
-      }
-    )
   }
 
 
