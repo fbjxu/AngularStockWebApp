@@ -21,3 +21,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
     padding: 1%;
     color: gray;
 }
+
+.market-open {
+    text-align: center;
+    background-color: #d7edda;
+    padding: 1%;
+    color: #33634e;
+}

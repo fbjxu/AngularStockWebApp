@@ -78,7 +78,7 @@ export class LivestockService {
         } else {
           this.liveStockData.livePriceUp=false;
         }
-        console.log("refreshed price: "+ price);
+        console.log("refreshed price: "+ JSON.stringify(price));
       });
     })
   }

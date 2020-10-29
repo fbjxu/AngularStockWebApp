@@ -38,7 +38,12 @@
             <p>{{ livestockService.liveStockData.liveTime }} </p>
         </div>
     </div>
-    
+    <div class="no-item" *ngIf="livestockService.liveStockData.bidPrice==null">
+        Market Closed on
+    </div>
+    <div class="market-open" *ngIf="!livestockService.liveStockData.bidPrice==null">
+        Market Is Open
+    </div>
     
     <mat-tab-group mat-stretch-tabs>
         <mat-tab label="Summary">
