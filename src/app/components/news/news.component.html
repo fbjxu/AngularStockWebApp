@@ -1,5 +1,11 @@
-<div class="container">
-    <div *ngFor = "let news of newsCollection">
-        {{ news.title }}
+<div class="container news-pic">
+    <div *ngFor = "let news of newsCollection" class="card col-md-6 article news-section">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ news.urlToImage || '//:0' }}"/>
+            </div>
+            <div class="news-title col-md-6">{{ news.title }} </div>
+        </div>
+            
     </div>
 </div>

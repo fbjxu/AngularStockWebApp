@@ -1,0 +1,22 @@
+.news-pic img {
+    display:in-block;
+    width: 50%;
+    height: 80%;
+    object-fit: cover;
+    
+}
+
+.news-title {
+    display:inline-block;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.article {
+    display: inline-block;
+}
+
+.news-section {
+    height: 10%;
+    width: 50%;
+}
