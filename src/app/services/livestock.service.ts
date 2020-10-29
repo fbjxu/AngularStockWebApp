@@ -85,7 +85,7 @@ export class LivestockService {
     dailyPriceObserve = this.dataService.getDailyChart(ticker);
     dailyPriceObserve.subscribe(dailyChartData=>{
         this.dailyChartRawData = dailyChartData;
-        console.log("obtained daily Chart data"+this.dailyChartRawData);
+        console.log("obtained daily Chart data"+JSON.stringify(this.dailyChartRawData));
       }
     )
   }

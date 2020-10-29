@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { HttpClient } from '@angular/common/http';
 import { interval, Subscription } from 'rxjs';
+import { LivestockService } from '../../services/livestock.service';
 
 declare var require: any;
 let Boost = require('highcharts/modules/boost');
@@ -21,81 +22,48 @@ noData(Highcharts);
 
 
 export class DailyChartComponent implements OnInit {
+  @Input() ticker:string;
+  price_series:any[];
+  volume_series:any[];
   public options: any; 
-  constructor(private http: HttpClient) { 
-      this.options = {
-
-        title: {
-            text: 'Solar Employment Growth by Sector, 2010-2016'
-        },
-    
-        subtitle: {
-            text: 'Source: thesolarfoundation.com'
-        },
-    
-        yAxis: {
-            title: {
-                text: 'Number of Employees'
-            }
-        },
-    
-        xAxis: {
-            accessibility: {
-                rangeDescription: 'Range: 2010 to 2017'
-            }
-        },
-    
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle'
-        },
-    
-        plotOptions: {
-            series: {
-                label: {
-                    connectorAllowed: false
-                },
-                pointStart: 2010
-            }
-        },
-    
-        series: [{
-            name: 'Installation',
-            data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-        }, {
-            name: 'Manufacturing',
-            data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-        }, {
-            name: 'Sales & Distribution',
-            data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-        }, {
-            name: 'Project Development',
-            data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-        }, {
-            name: 'Other',
-            data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
-        }],
-    
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 500
-                },
-                chartOptions: {
-                    legend: {
-                        layout: 'horizontal',
-                        align: 'center',
-                        verticalAlign: 'bottom'
-                    }
-                }
-            }]
-        }
-    
-    }
+  constructor(
+      private livestockService:LivestockService,
+      private http: HttpClient) { 
+      //Data prep
+      
   }
 
   ngOnInit(){
+    var dailyData = this.livestockService.dailyChartRawData;
+    console.log("output daily chart daily data"+JSON.stringify(dailyData));
+      for (let dayData of dailyData) {
+        var time = Date.parse(dayData.date);
+        if(dayData.date!=null){
+            this.price_series.push([time, dayData.close]);
+        }
+      }
+      console.log("output price series" + JSON.stringify(this.price_series));
+
+      //high chart graph
+      this.options = {
+
+        rangeSelector: {
+            enabled: false
+        },
+
+        title: {
+            text: 'Stock Price ',
+        },
+
+        series: [{
+            name: 'AAPL',
+            data: this.price_series,
+            tooltip: {
+                valueDecimals: 2
+            },
+            color: 'red',
+        }],
+    }
     Highcharts.chart('test', this.options);
   }
 
