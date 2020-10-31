@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatTabsModule} from '@angular/material/tabs';
 import { DailyChartComponent } from './components/daily-chart/daily-chart.component';
 import { NewsComponent } from './components/news/news.component';
+import { NewsWindowComponent } from './components/news-window/news-window.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { NewsComponent } from './components/news/news.component';
     MainComponent,
     StockDetailComponent,
     DailyChartComponent,
-    NewsComponent
+    NewsComponent,
+    NewsWindowComponent
   ],
   imports: [
     BrowserModule,

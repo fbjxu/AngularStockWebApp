@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { startWith } from 'rxjs/operators';
 import { interval, Subscription } from 'rxjs';
@@ -13,7 +13,9 @@ export class NewsComponent implements OnInit {
   @Input() ticker: string;
   newsCollection:newsItem[] = []; 
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) { 
+
+  }
 
   ngOnInit(): void {
     this.getApiResponse(this.ticker).then(
@@ -28,6 +30,8 @@ export class NewsComponent implements OnInit {
     .toPromise().then(res => {
         return res;
     })
-}
+  }
+
+
 
 }
