@@ -1,0 +1,31 @@
+.modal-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.date-text {
+    color: rgb(125, 132, 140);
+    font-weight: bold;
+    font-size: 0.7rem;
+}
+
+.info-text {
+    color: rgb(145, 151, 157);
+    font-size: 0.7rem;
+}
+
+.fa-facebook {
+    display: inline-block;
+    background: #3B5998;
+    color: white;
+  }
+
+.fa {
+    padding: 2%;
+    font-size: 45px;
+    width: 15%;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    display: inline-block;
+  }

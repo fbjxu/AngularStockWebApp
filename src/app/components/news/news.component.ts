@@ -3,6 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { startWith } from 'rxjs/operators';
 import { interval, Subscription } from 'rxjs';
 import { newsItem } from '../../models/newsItem';
+//pop up news window
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NewsWindowComponent } from '../news-window/news-window.component';
+
 
 @Component({
   selector: 'app-news',
@@ -13,7 +17,9 @@ export class NewsComponent implements OnInit {
   @Input() ticker: string;
   newsCollection:newsItem[] = []; 
 
-  constructor(private http:HttpClient) { 
+  constructor(
+    private modalService: NgbModal,
+    private http:HttpClient) { 
 
   }
 
@@ -30,6 +36,13 @@ export class NewsComponent implements OnInit {
     .toPromise().then(res => {
         return res;
     })
+  }
+
+  showNewsDialog(news:newsItem) {
+    let component = NewsWindowComponent;
+    const modelRef = this.modalService.open(component, { ariaLabelledBy: 'modal-basic-title', size: 'md'});
+    console.log(news.author);
+    modelRef.componentInstance.news = news;
   }
 
 

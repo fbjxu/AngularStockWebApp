@@ -14,6 +14,9 @@ import { StockDetailComponent } from './components/stock-detail/stock-detail.com
 import { MainComponent } from './components/main/main.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 //material
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -22,7 +25,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { DailyChartComponent } from './components/daily-chart/daily-chart.component';
 import { NewsComponent } from './components/news/news.component';
 import { NewsWindowComponent } from './components/news-window/news-window.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -50,7 +52,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatTabsModule,
-    NgbModule
+    NgbModule,
+  ],
+  entryComponents: [
+    NewsWindowComponent, 
   ],
   providers: [],
   bootstrap: [AppComponent]

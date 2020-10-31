@@ -1,1 +1,26 @@
-<p>news-window works!</p>
+<div class="modal-header">
+    <h2 class="modal-title"> {{ this.news.source.name }} 
+        <h3 class="date-text">{{ formatted_date }}</h3>
+    </h2>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Dismissed')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    
+</div>
+<div class="modal-body">
+<h3> {{ this.news.title }}</h3>
+<p>  {{ this.news.description }}</p>
+<p class="info-text">For more details click <a href="{{ news.url }}">here</a></p>
+<div class="card">
+    <p>Share</p>
+    <span>
+        <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?text={{ news.title + ' ' + news.url}}"></a>
+        <span class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ news.url }}" class="fa fa-facebook fb-xfbml-parse-ignore"></a></span>
+    </span>
+    
+</div>
+</div>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="SpVXt2gR"></script>
+<!-- <div>hello pop up</div> -->
