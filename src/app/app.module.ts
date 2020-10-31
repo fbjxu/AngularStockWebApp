@@ -22,6 +22,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { DailyChartComponent } from './components/daily-chart/daily-chart.component';
 import { NewsComponent } from './components/news/news.component';
 import { NewsWindowComponent } from './components/news-window/news-window.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { NewsWindowComponent } from './components/news-window/news-window.compon
     MatAutocompleteModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
