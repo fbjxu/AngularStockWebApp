@@ -10,16 +10,16 @@
         <div class="card-body">
         <!-- first row -->
             <div class="row row-layout">
-                <div class="col">
+                <div class="col col-md-3 col-sm-6">
                     <p class ="text-start portfolio-body">Quantity: </p>
                 </div>
-                <div class="col">
+                <div class="col col-md-3 col-sm-6">
                     <p class ="text-end portfolio-body">{{ item.numShares }} </p> 
                 </div>
-                <div class="col">
+                <div class="col col-md-3 col-sm-6">
                     <p class ="text-start portfolio-body">Change: </p>
                 </div>
-                <div class="col">
+                <div class="col col-md-3 col-sm-6">
                     <div class ="text-end portfolio-body" 
                     [ngClass]="{
                         'positive' : item.change > 0,
@@ -41,19 +41,19 @@
                         {{ item.change }} 
                     </div> 
                 </div>
-            </div>
+            
             <!-- second row -->
-            <div class="row row-layout">
-                <div class="col">
+            
+                <div class="col col-md-3 col-sm-6">
                     <p class ="text-start portfolio-body">Avg. Cost / Share: </p>
                 </div>
-                <div class="col">
+                <div class="col col-md-3 col-sm-6">
                     <p class ="text-end portfolio-body">{{ item.avgPrice }} </p> 
                 </div>
-                <div class="col">
+                <div class="col col-md-3 col-sm-6">
                     <p class ="text-start portfolio-body">Current Price: </p>
                 </div>
-                <div class="col">
+                <div class="col col-md-3 col-sm-6">
                     <div class ="text-end portfolio-body" 
                     [ngClass]="{
                         'positive' : item.change > 0,
@@ -61,20 +61,20 @@
                         {{ item.currPrice }} 
                     </div> 
                 </div>
-            </div>
+       
 
             <!-- third row -->
-            <div class="row row-layout">
-                <div class="col">
+           
+                <div class="col col-md-3 col-sm-6">
                     <p class ="text-start portfolio-body">Toal Cost: </p>
                 </div>
-                <div class="col">
+                <div class="col col-md-3 col-sm-6">
                     <p class ="text-end portfolio-body">{{ item.totalCost }} </p> 
                 </div>
-                <div class="col">
+                <div class="col col-md-3 col-sm-6">
                     <p class ="text-start portfolio-body">Market Value: </p>
                 </div>
-                <div class="col">
+                <div class="col col-md-3 col-sm-6">
                     <div class ="text-end portfolio-body" 
                     [ngClass]="{
                         'positive' : item.change > 0,
@@ -85,8 +85,8 @@
             </div>
         </div>   
         <div class="card-footer text-end">
-            <button type="button" class="btn btn-primary footer" (click)="showBuyDialog(item.ticker, item.name)">Buy</button>
-            <button type="button" class="btn btn-danger footer">Sell</button>
+            <button type="button" class="btn btn-primary footer" (click)="showBuyDialog(item.ticker, item.name, true)">Buy</button>
+            <button type="button" class="btn btn-danger footer" (click)="showBuyDialog(item.ticker, item.name, false)">Sell</button>
         </div>
 
     </div>

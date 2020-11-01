@@ -11,6 +11,7 @@ import { PortfoliomanagerService } from '../../services/portfoliomanager.service
 export class StockbuyComponent implements OnInit {
   @Input() public ticker:string;
   @Input() public name: string;
+  @Input() public isBuy: boolean = true;
   numShares:number= 0;
   price: number = 100;
   
@@ -25,6 +26,10 @@ export class StockbuyComponent implements OnInit {
 
   buyStock(ticker:string, name:string, numShares: number, price: number) {
     this.portfolioManager.buyStock(ticker,name, price*numShares, numShares, price);
+  }
+
+  sellStock(ticker:string, numShares:number) {
+    this.portfolioManager.sellStock(ticker, numShares);
   }
 
 }

@@ -88,7 +88,7 @@ export class PortfolioComponent implements OnInit {
                   newPortfolioListDisplay[i].numShares = stock.numShares.toFixed(2);
                   newPortfolioListDisplay[i].avgPrice = stock.avgPrice.toFixed(2);
                   newPortfolioListDisplay[i].totalCost = stock.cost.toFixed(2);
-                  newPortfolioListDisplay[i].marketVal = stock.numShares * newPortfolioListDisplay[i].currPrice;
+                  newPortfolioListDisplay[i].marketVal = (stock.numShares * newPortfolioListDisplay[i].currPrice).toFixed(2);
                   this.myPortfolioDisplay = newPortfolioListDisplay;
                   console.log("portfolio change: the updated portfolio display: ", JSON.stringify(this.myPortfolioDisplay));
                   break;
@@ -111,11 +111,12 @@ export class PortfolioComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  showBuyDialog(ticker: string, name: string) {
+  showBuyDialog(ticker: string, name: string, isBuy: boolean) {
     let component = StockbuyComponent;
     const modelRef = this.modalService.open(component, { ariaLabelledBy: 'modal-basic-title', size: 'md' });
     modelRef.componentInstance.ticker = ticker;
     modelRef.componentInstance.name = name;
+    modelRef.componentInstance.isBuy = isBuy;
   }
 
 }

@@ -70,7 +70,8 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
     let component = StockbuyComponent;
     const modelRef = this.modalService.open(component, { ariaLabelledBy: 'modal-basic-title', size: 'md'});
     modelRef.componentInstance.ticker = this.ticker;
-    modelRef.componentInstance.name = this.livestockService.liveStockData.name
+    modelRef.componentInstance.name = this.livestockService.liveStockData.name;
+    modelRef.componentInstance.isBuy = true;
   }
 
   ngOnDestroy() {

@@ -59,7 +59,7 @@ export class PortfoliomanagerService {
     return;
   }
 
-  public sellStock(ticker_input:string, name: string, marketVal:number, numShares:number, avgPrice:number) {
+  public sellStock(ticker_input:string, numShares:number) {
     let portfolioList = this.getPortfolioList();
     let portfolioTickers = this.getPortfolioTickerList();
     for (let stock of portfolioList) {
