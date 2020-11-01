@@ -15,7 +15,7 @@
             </h2>
             <h3>{{ livestockService.liveStockData.name}} </h3>
             <p>{{ livestockService.liveStockData.exchangeCode }}</p>
-            <button type="button" class="btn btn-success buy" (click)="showBuyDialog(ticker)">Buy</button>
+            <button type="button" class="btn btn-success buy" (click)="showBuyDialog()">Buy</button>
         </div>
         <div class="col">
             <h1 [ngClass]="{

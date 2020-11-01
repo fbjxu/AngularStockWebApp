@@ -15,7 +15,7 @@
   <div class="modal-footer">
     <fieldset class="w-100">
     <p  class="float-left"> Total: {{ price * numShares }}</p>
-    <button type="button" class="btn btn-success float-right" (click)="activeModal.dismiss('Dismissed')">Buy</button>
+    <button type="button" class="btn btn-success float-right" (click)="buyStock(ticker,name,numShares,price);activeModal.dismiss('Dismissed')">Buy</button>
     </fieldset>
   </div>
 

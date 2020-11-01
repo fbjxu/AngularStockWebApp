@@ -115,4 +115,7 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
   // }); 
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

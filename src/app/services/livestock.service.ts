@@ -100,5 +100,9 @@ export class LivestockService {
     return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
   }
 
+  public destroyCleanup() {
+    this.subscription.unsubscribe();
+  }
+
 
 }

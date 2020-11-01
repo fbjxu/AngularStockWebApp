@@ -105,4 +105,8 @@ export class DailyChartComponent implements OnInit {
       })
   }
 
+  ngOnDestroy() {
+      this.subscription.unsubscribe();
+  }
+
 }
