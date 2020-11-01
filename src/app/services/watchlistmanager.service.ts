@@ -35,7 +35,6 @@ export class WatchlistmanagerService {
   public getWatchList(): watchListStock[] {
     console.log("inside getWatchLIst");
     let localStorageItem = JSON.parse(localStorage.getItem('watchlist')); //get current json from local storage
-    var stockList:string[]=[]; //list of tickers;
     if (localStorageItem == null) {
       return [];
     }
