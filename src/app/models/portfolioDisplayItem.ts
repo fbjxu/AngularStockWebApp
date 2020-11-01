@@ -3,25 +3,25 @@ import { tick } from '@angular/core/testing';
 export class portfolioDisplayItem {
     ticker: string;
     name: string;
-    cost: string;
+    currPrice:string;
+    change: string;
+    changePercent: string;
     numShares: string;
     avgPrice: string;
-    change: string;
-    currentPrice:string;
-    marketValue:string;
+    totalCost: string;
+    marketVal:string;
 
 
 
-    constructor(ticker:string, name:string, cost:string, 
-            numShares:string, avgPrice:string, change:string,
-            currentPrice:string, marketValue:string) {
+    constructor(ticker,name, currPrice, change, changePercent, numShares, avgPrice, totalCost, marketVal) {
         this.ticker = ticker;
         this.name = name;
-        this.cost = cost;
+        this.currPrice = currPrice;
+        this.change = change;
+        this.changePercent = changePercent;
         this.numShares = numShares;
         this.avgPrice = avgPrice;
-        this.change = change;
-        this.currentPrice = currentPrice;
-        this.marketValue = marketValue;
+        this.totalCost = totalCost;
+        this.marketVal = marketVal;
     }
 }

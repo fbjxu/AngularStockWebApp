@@ -1,0 +1,44 @@
+
+.header-ticker {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.header-name {
+    color: #7a7f85;
+    font-size: 1.5rem;
+}
+
+.text-end {
+    text-align: end;
+}
+
+.text-start {
+    text-align: start;
+}
+
+.row-layout {
+    margin-left: 2%;
+    margin-right: 2%;
+    font-size: 1rem;
+}
+
+.second-row {
+    margin: 2%;
+    font-size: 15px;
+}
+
+.stock-card {
+    margin-bottom: 2%;
+    cursor: pointer; 
+}
+
+.close-icon {
+    position: absolute;
+    top: 2%;
+    right: 1%;
+}
+
+.footer {
+    margin: 1%;
+}
