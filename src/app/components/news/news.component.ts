@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { startWith } from 'rxjs/operators';
 import { interval, Subscription } from 'rxjs';
 import { newsItem } from '../../models/newsItem';
+import { SpinnerService } from 'src/app/services/spinner.service';
+
 //pop up news window
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewsWindowComponent } from '../news-window/news-window.component';
@@ -18,9 +20,10 @@ export class NewsComponent implements OnInit {
   newsCollection:newsItem[] = []; 
 
   constructor(
+    public spinnerService:SpinnerService,
     private modalService: NgbModal,
     private http:HttpClient) { 
-
+      this.spinnerService.visible();
   }
 
   ngOnInit(): void {
@@ -45,6 +48,9 @@ export class NewsComponent implements OnInit {
     modelRef.componentInstance.news = news;
   }
 
+  ngAfterViewInit() {
+    this.spinnerService.invisible();
+  }
 
 
 }

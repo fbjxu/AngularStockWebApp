@@ -26,6 +26,7 @@ import { DailyChartComponent } from './components/daily-chart/daily-chart.compon
 import { NewsComponent } from './components/news/news.component';
 import { NewsWindowComponent } from './components/news-window/news-window.component';
 import { StockbuyComponent } from './components/stockbuy/stockbuy.component';
+import { HistoryChartComponent } from './components/history-chart/history-chart.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { StockbuyComponent } from './components/stockbuy/stockbuy.component';
     DailyChartComponent,
     NewsComponent,
     NewsWindowComponent,
-    StockbuyComponent
+    StockbuyComponent,
+    HistoryChartComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ app.use(cors());
 var token = "token=a4d9cb249227d4a1c64fac98783787069f17c866";
 var newstoken = "fd84f96ea1e248a29d8fa184296cdb8f";
 var today = getDate(new Date());
+var prevDate = getPrevDate(new Date());
 
 //helper functions
 function getDate(date) {
@@ -22,6 +23,18 @@ function getDate(date) {
     if (day.length < 2) 
         day = '0' + day;
     return [year, month, day].join('-');
+}
+
+function getPrevDate(date) {
+    var date = new Date(date),
+        month = '' + (date.getMonth() + 1),
+        day = '' + date.getDate(),
+        year = date.getFullYear();
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+    return [year-2, month, day].join('-');
 }
 
 
@@ -61,6 +74,16 @@ app.get('/api/pricesummary/:ticker', function (req, res) {
 app.get('/api/dailychartsummary/:ticker', function (req, res) {
     var startDate  
     fetch("https://api.tiingo.com/iex/"+req.params.ticker+"/prices?"+token+"&startDate="+today+"&resampleFreq=4min&columns=close,volume", {
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(data=>{res.json(data)});
+});
+
+//API: historyChart
+app.get('/api/historychartsummary/:ticker', function (req, res) {
+    var startDate  
+    fetch("https://api.tiingo.com/iex/"+req.params.ticker+"/prices?"+token+"&startDate="+prevDate+"&resampleFreq=12hour&columns=open,high,low,close,volume", {
         headers: { 'Content-Type': 'application/json' }
     })
     .then(res => res.json())
