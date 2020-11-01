@@ -25,6 +25,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { DailyChartComponent } from './components/daily-chart/daily-chart.component';
 import { NewsComponent } from './components/news/news.component';
 import { NewsWindowComponent } from './components/news-window/news-window.component';
+import { StockbuyComponent } from './components/stockbuy/stockbuy.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { NewsWindowComponent } from './components/news-window/news-window.compon
     StockDetailComponent,
     DailyChartComponent,
     NewsComponent,
-    NewsWindowComponent
+    NewsWindowComponent,
+    StockbuyComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,7 @@ import { NewsWindowComponent } from './components/news-window/news-window.compon
   ],
   entryComponents: [
     NewsWindowComponent, 
+    StockbuyComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

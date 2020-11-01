@@ -6,6 +6,10 @@ import { LivestockService } from '../../services/livestock.service';
 import { startWith } from 'rxjs/operators';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { WatchlistmanagerService } from '../../services/watchlistmanager.service';
+//pop up news window
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NewsWindowComponent } from '../news-window/news-window.component';
+import { StockbuyComponent } from '../stockbuy/stockbuy.component';
 
 @Component({
   selector: 'app-stock-detail',
@@ -23,6 +27,7 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
 
   //stock info
   constructor(
+    private modalService: NgbModal, 
     private watchlistmanager:WatchlistmanagerService,
     private livestockService: LivestockService,
     private route: ActivatedRoute, public componentLayoutService:ComponentLayoutServiceService, 
@@ -59,5 +64,11 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {
     this.spinnerService.invisible();
     this.showSummary = true;
+  }
+
+  showBuyDialog(ticker:string) {
+    let component = StockbuyComponent;
+    const modelRef = this.modalService.open(component, { ariaLabelledBy: 'modal-basic-title', size: 'md'});
+    modelRef.componentInstance.ticker = ticker;
   }
 }

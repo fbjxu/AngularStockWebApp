@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ ticker }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Dismissed')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Current Price: {{ price }} </p>
+    <form>
+      <div class="form-group">
+        <span>Quantity  </span><input ngbAutofocus type="number" class="form-control quantity-input" id="stockBuy" name="stockBuy" [(ngModel)] = "numShares">
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <fieldset class="w-100">
+    <p  class="float-left"> Total: {{ price * numShares }}</p>
+    <button type="button" class="btn btn-success float-right" (click)="activeModal.dismiss('Dismissed')">Buy</button>
+    </fieldset>
+  </div>
+
+  

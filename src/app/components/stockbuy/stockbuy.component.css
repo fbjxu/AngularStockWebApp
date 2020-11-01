@@ -1,0 +1,14 @@
+.quantity-input {
+    width: 50%;
+    display: inline-block;
+}
+
+.cost {
+    text-align: left;
+    display: inline-block;
+
+}
+
+.buy-footer {
+    text-align: left;
+}
