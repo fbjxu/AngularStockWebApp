@@ -88,6 +88,7 @@ export class PortfolioComponent implements OnInit {
                   newPortfolioListDisplay[i].numShares = stock.numShares.toFixed(2);
                   newPortfolioListDisplay[i].avgPrice = stock.avgPrice.toFixed(2);
                   newPortfolioListDisplay[i].totalCost = stock.cost.toFixed(2);
+                  newPortfolioListDisplay[i].marketVal = stock.numShares * newPortfolioListDisplay[i].currPrice;
                   this.myPortfolioDisplay = newPortfolioListDisplay;
                   console.log("portfolio change: the updated portfolio display: ", JSON.stringify(this.myPortfolioDisplay));
                   break;
