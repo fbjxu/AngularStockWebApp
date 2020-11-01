@@ -23,6 +23,7 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
   showWatchList = false;
   tickerList:string[] = [];
   subscription: Subscription;
+  deletedTicker:string;
 
   constructor(
     public router: Router,
@@ -66,34 +67,16 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.watchlistmanager.getWatchListChange().
+    this.watchlistmanager.watchlistChange$.
       subscribe(data =>{
         if(data.length == 0) {
           this.myWatchListDisplay =[];
         }
         else {
-        this.watchlistmanager.createMyStocklist().subscribe(data=>
-          {
-            let newmyWatchListDisplay = []; //new watchlsit
-            for (let stock of data) {
-              var ticker = stock.ticker;
-              for (let watch of this.myWatchList) {
-                if (ticker.toLowerCase()==watch.ticker.toLowerCase()) {
-                  var currPrice = stock.last.toFixed(2);
-                  var change = (stock.last - stock.prevClose).toFixed(2);
-                  var changePercent = "%"+ ((stock.last - stock.prevClose)*100/stock.prevClose).toFixed(2);
-                  var watchListDisplayNewItem: watchListDisplayItem = new watchListDisplayItem(
-                    watch.name, watch.ticker.toUpperCase(), currPrice, change, changePercent);
-                    newmyWatchListDisplay.push(watchListDisplayNewItem);
-                }
-              }
-              
-            }
-            console.log(newmyWatchListDisplay);
-            this.myWatchListDisplay = newmyWatchListDisplay;
-          },
-          err => console.log("there is an error")
-        );}
+          console.log("inside filter  in detect change");
+          this.myWatchListDisplay = this.myWatchListDisplay.filter(item=>(item.ticker).toLowerCase()!=this.deletedTicker.toLowerCase());
+          console.log("current display (filtered): ", JSON.stringify(this.myWatchListDisplay))
+        }
       }
     )
   }
@@ -109,6 +92,7 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
   }
 
   removeTicker(ticker:string) {
+    this.deletedTicker =ticker;
     this.watchlistmanager.deleteTicker(ticker);
   //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
   //     this.router.navigate(['/watchlist']);
@@ -117,5 +101,6 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+
   }
 }

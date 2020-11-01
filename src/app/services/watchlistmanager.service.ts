@@ -33,9 +33,6 @@ export class WatchlistmanagerService {
     return this.isYellowStar$;
   }
 
-  public getWatchListChange():Observable<watchListStock[]> {
-    return this.watchlistChange$;
-  }
 
   public getWatchList(): watchListStock[] {
     console.log("inside getWatchLIst");
