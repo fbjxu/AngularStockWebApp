@@ -7,6 +7,8 @@ import { tickerPrice } from '../../models/tickerPrice';
 import { watchListDisplayItem } from '../../models/watchListDisplayItem';
 import { watchListStock } from '../../models/watchListStock';
 import { Router } from '@angular/router';
+import { Observable, interval, Subscription } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 
 @Component({
@@ -17,9 +19,10 @@ import { Router } from '@angular/router';
 export class WatchlistComponent implements OnInit, AfterViewInit {
 
   myWatchList:watchListStock[];
-  myStockList: tickerPrice[];
   myWatchListDisplay: watchListDisplayItem[] = [];
   showWatchList = false;
+  tickerList:string[] = [];
+  subscription: Subscription;
 
   constructor(
     public router: Router,
@@ -29,33 +32,70 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
     public spinnerService: SpinnerService) { 
     this.spinnerService.visible();
     this.componentLayoutService.makeInvisible();
+    this.myWatchList = this.watchlistmanager.getWatchList();
+    //init watchlist
+    
+    //check price every 15s
+    const source = interval(15000); //set interval to 15s
+    this.subscription = source.pipe(startWith(0)).subscribe(val => {
+      console.log("called watchlist 15s subscription")
+        this.watchlistmanager.createMyStocklist().subscribe(data=>
+          { 
+            var newmyWatchListDisplay =[];
+            for (let stock of data) {
+              var ticker = stock.ticker;
+              for (let watch of this.myWatchList) {
+                if (ticker.toLowerCase()==watch.ticker.toLowerCase()) {
+                  this.tickerList.push(ticker.toLowerCase());
+                  var currPrice = stock.last.toFixed(2);
+                  var change = (stock.last - stock.prevClose).toFixed(2);
+                  var changePercent = "%"+ ((stock.last - stock.prevClose)*100/stock.prevClose).toFixed(2);
+                  var watchListDisplayNewItem: watchListDisplayItem = new watchListDisplayItem(
+                    watch.name, watch.ticker.toUpperCase(), currPrice, change, changePercent);
+                    newmyWatchListDisplay.push(watchListDisplayNewItem);
+                }
+              }
+            }
+            this.myWatchListDisplay = newmyWatchListDisplay;
+          },
+          err => console.log("there is an error")
+        );
+    })
+
    
   }
 
   ngOnInit(): void {
-    this.myWatchList = this.watchlistmanager.getWatchList();
-    
-      this.watchlistmanager.createMyStocklist().subscribe(data=>
-        {
-          this.myStockList = data;
-          for (let stock of data) {
-            var ticker = stock.ticker;
-            for (let watch of this.myWatchList) {
-              if (ticker.toLowerCase()==watch.ticker.toLowerCase()) {
-                var currPrice = stock.last.toFixed(2);
-                var change = (stock.last - stock.prevClose).toFixed(2);
-                var changePercent = "%"+ ((stock.last - stock.prevClose)*100/stock.prevClose).toFixed(2);
-                var watchListDisplayNewItem: watchListDisplayItem = new watchListDisplayItem(
-                  watch.name, watch.ticker.toUpperCase(), currPrice, change, changePercent);
-                  this.myWatchListDisplay.push(watchListDisplayNewItem);
+    this.watchlistmanager.getWatchListChange().
+      subscribe(data =>{
+        if(data.length == 0) {
+          this.myWatchListDisplay =[];
+        }
+        else {
+        this.watchlistmanager.createMyStocklist().subscribe(data=>
+          {
+            let newmyWatchListDisplay = []; //new watchlsit
+            for (let stock of data) {
+              var ticker = stock.ticker;
+              for (let watch of this.myWatchList) {
+                if (ticker.toLowerCase()==watch.ticker.toLowerCase()) {
+                  var currPrice = stock.last.toFixed(2);
+                  var change = (stock.last - stock.prevClose).toFixed(2);
+                  var changePercent = "%"+ ((stock.last - stock.prevClose)*100/stock.prevClose).toFixed(2);
+                  var watchListDisplayNewItem: watchListDisplayItem = new watchListDisplayItem(
+                    watch.name, watch.ticker.toUpperCase(), currPrice, change, changePercent);
+                    newmyWatchListDisplay.push(watchListDisplayNewItem);
+                }
               }
+              
             }
-          }
-        },
-        err => console.log("there is an error")
-      );
-
-    
+            console.log(newmyWatchListDisplay);
+            this.myWatchListDisplay = newmyWatchListDisplay;
+          },
+          err => console.log("there is an error")
+        );}
+      }
+    )
   }
 
   ngAfterViewInit() {
@@ -70,9 +110,9 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
 
   removeTicker(ticker:string) {
     this.watchlistmanager.deleteTicker(ticker);
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/watchlist']);
-  }); 
+  //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+  //     this.router.navigate(['/watchlist']);
+  // }); 
   }
 
 }

@@ -13,6 +13,7 @@ export class WatchlistmanagerService {
   // public watchListChange: Subject<string[]> = new Subject<string[]>();//init to empty
   public myStockList:tickerPrice[];
   public isYellowStar$:Subject<boolean> = new Subject<boolean>();
+  public watchlistChange$:Subject<watchListStock[]> = new Subject<watchListStock[]>();
 
   constructor(private dataService:DataServiceService) { 
     // let watchlist = this.getWatchList();
@@ -32,6 +33,10 @@ export class WatchlistmanagerService {
     return this.isYellowStar$;
   }
 
+  public getWatchListChange():Observable<watchListStock[]> {
+    return this.watchlistChange$;
+  }
+
   public getWatchList(): watchListStock[] {
     console.log("inside getWatchLIst");
     let localStorageItem = JSON.parse(localStorage.getItem('watchlist')); //get current json from local storage
@@ -47,6 +52,7 @@ export class WatchlistmanagerService {
     watchlist.push(newWatchListItem);
     this.setLocalStorageWatchList(watchlist);
     this.isYellowStar$.next(true);
+    this.watchlistChange$.next(watchlist);
     console.log(watchlist);
   }
 
@@ -55,6 +61,7 @@ export class WatchlistmanagerService {
     watchlist = watchlist.filter(item => item.ticker.toLowerCase() != ticker_input.toLowerCase());
     this.setLocalStorageWatchList(watchlist);
     this.isYellowStar$.next(false);
+    this.watchlistChange$.next(watchlist);
     console.log(watchlist);
   }
 
