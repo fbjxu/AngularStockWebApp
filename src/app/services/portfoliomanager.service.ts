@@ -10,7 +10,7 @@ import { portfolioEntry } from '../models/portfolioEntry';
   providedIn: 'root'
 })
 export class PortfoliomanagerService {
-  public portfolioChange$:Subject<portfolioEntry[]> = new Subject<portfolioEntry[]>();
+  public portfolioChange$:Subject<string> = new Subject<string>();
 
   constructor(private dataService:DataServiceService) { }
 
@@ -43,7 +43,7 @@ export class PortfoliomanagerService {
         stock.numShares += numShares;
         stock.avgPrice = stock.cost / stock.numShares;
         this.setLocalStoragePortfolioList(portfolioList);//update local storage's portfolio number
-        this.portfolioChange$.next(portfolioList);
+        this.portfolioChange$.next(ticker_input.toLowerCase());
         console.log("inside buystock: added existed stock now the portfolio is: ", portfolioList);
         return;
       }
@@ -51,10 +51,10 @@ export class PortfoliomanagerService {
     //new stock
     let newPortfolioEntry = new portfolioEntry(ticker_input, name, cost, numShares, avgPrice);
     portfolioList.push(newPortfolioEntry);
-    portfolioTickers.push(ticker_input);
+    portfolioTickers.push(ticker_input.toLowerCase());
     this.setLocalStoragePortfolioList(portfolioList);
     this.setLocalStoragePortfolioTickers(portfolioTickers);
-    this.portfolioChange$.next(portfolioList);
+    this.portfolioChange$.next(ticker_input.toLowerCase());
     console.log("inside buystock: added new stock: now the portfolio is", portfolioTickers);
     return;
   }
@@ -73,7 +73,7 @@ export class PortfoliomanagerService {
         }
         this.setLocalStoragePortfolioList(portfolioList);//update local storage's portfolio number
         this.setLocalStoragePortfolioTickers(portfolioTickers);
-        this.portfolioChange$.next(portfolioList);
+        this.portfolioChange$.next(ticker_input.toLowerCase());
         console.log("inside sellstock: sold existed stock now the portfolio is: ", portfolioList);
         return;
       }
