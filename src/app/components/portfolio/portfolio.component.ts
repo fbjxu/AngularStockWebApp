@@ -115,13 +115,14 @@ export class PortfolioComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  showBuyDialog(ticker: string, name: string, isBuy: boolean, maxNumShares:number) {
+  showBuyDialog(ticker: string, name: string, isBuy: boolean, maxNumShares:number, currPirce: number) {
     let component = StockbuyComponent;
     const modelRef = this.modalService.open(component, { ariaLabelledBy: 'modal-basic-title', size: 'md' });
     modelRef.componentInstance.ticker = ticker;
     modelRef.componentInstance.name = name;
     modelRef.componentInstance.isBuy = isBuy;
     modelRef.componentInstance.maxNumShares = maxNumShares;
+    modelRef.componentInstance.price = currPirce;
   }
 
 }

@@ -85,8 +85,8 @@
             </div>
         </div>   
         <div class="card-footer text-end">
-            <button type="button" class="btn btn-primary footer" (click)="showBuyDialog(item.ticker, item.name, true)">Buy</button>
-            <button type="button" class="btn btn-danger footer" (click)="showBuyDialog(item.ticker, item.name, false, item.numShares)">Sell</button>
+            <button type="button" class="btn btn-primary footer" (click)="showBuyDialog(item.ticker, item.name, true, item.numShares, item.currPrice)">Buy</button>
+            <button type="button" class="btn btn-danger footer" (click)="showBuyDialog(item.ticker, item.name, false, item.numShares, item.currPrice)">Sell</button>
         </div>
 
     </div>
