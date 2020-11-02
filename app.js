@@ -4,7 +4,8 @@ var cors = require('cors');
 const fetch = require('node-fetch');
 var app = express();
 app.use(cors());
-
+const path = require('path');
+// console.log(__dirname);
 
 //helper attributes
 var token = "token=a4d9cb249227d4a1c64fac98783787069f17c866";
@@ -37,6 +38,24 @@ function getPrevDate(date) {
     return [year-2, month, day].join('-');
 }
 
+// Serve only the static files form the dist directory
+app.use(express.static(__dirname + '/dist/stock-web-app'));
+
+app.get('/', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
+
+app.get('/watchlist', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
+
+app.get('/portfolio', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
+
+app.get('/details/:ticker', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
 
 //API: automcomplete
 app.get('/api/autocomplete/:ticker', function (req, res) {
@@ -112,6 +131,6 @@ app.get('/api/news/:ticker', function (req, res) {
 
 
 //Open port
-app.listen(80, function () {
-console.log('CORS- enabled web server listening on port 80')
+app.listen(3080, function () {
+console.log('CORS- enabled web server listening on port 3080')
 });
