@@ -34,6 +34,10 @@ export class PortfolioComponent implements OnInit {
     this.spinnerService.visible();
     this.componentLayoutService.makeInvisible(); //make search section disappear
 
+    
+  }
+
+  ngOnInit(): void {
     //check price every 15s
     const source = interval(15000);//set interval to 15s
     this.subscription = source.pipe(startWith(0)).subscribe(val => {
@@ -64,9 +68,7 @@ export class PortfolioComponent implements OnInit {
         }
       })
     })
-  }
 
-  ngOnInit(): void {
     this.portfolioManager.portfolioChange$.
       subscribe(data => {
         console.log("portfolio change detected");
@@ -87,7 +89,7 @@ export class PortfolioComponent implements OnInit {
 
 
 
-                newPortfolioListDisplay[i].numShares = stock.numShares.toFixed(2);
+                newPortfolioListDisplay[i].numShares = stock.numShares.toFixed(0);
                 newPortfolioListDisplay[i].avgPrice = stock.avgPrice.toFixed(2);
                 newPortfolioListDisplay[i].totalCost = stock.cost.toFixed(2);
                 newPortfolioListDisplay[i].marketVal = (stock.numShares * newPortfolioListDisplay[i].currPrice).toFixed(2);
