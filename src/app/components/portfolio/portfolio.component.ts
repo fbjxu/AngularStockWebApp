@@ -72,27 +72,29 @@ export class PortfolioComponent implements OnInit {
         console.log("portfolio change detected");
         for (var i = 0; i < this.myPortfolioDisplay.length; i++) {
           if (this.myPortfolioDisplay[i].ticker.toLowerCase() == data) {
-            
-
-            console.log("portfolio change: stock;s position now changed to non-zero");
+            // console.log("portfolio change: stock;s position now changed to non-zero");
+            // console.log("portfolio printing out data")
             var newPortfolioList = this.portfolioManager.getPortfolioList();
+            console.log("data is ", data, "data in updated list?:", this.portfolioManager.getPortfolioTickerList().includes(data))
+            if (!(this.portfolioManager.getPortfolioTickerList().includes(data))) {
+              console.log("portfolio change: stock;s position now changed to zero");
+              this.myPortfolioDisplay = this.myPortfolioDisplay.filter(item => item.ticker.toLowerCase() != data);
+              break;
+            }
             var newPortfolioListDisplay = this.myPortfolioDisplay;
             for (let stock of newPortfolioList) {
               if (stock.ticker.toLowerCase() == data) {
-                if (stock.numShares == 0) {//check if the stock position is empty
-                  console.log("portfolio change: stock;s position now changed to zero");
-                  this.myPortfolioDisplay = this.myPortfolioDisplay.splice(i, 1);
-                  break;
-                }
-                else {
-                  newPortfolioListDisplay[i].numShares = stock.numShares.toFixed(2);
-                  newPortfolioListDisplay[i].avgPrice = stock.avgPrice.toFixed(2);
-                  newPortfolioListDisplay[i].totalCost = stock.cost.toFixed(2);
-                  newPortfolioListDisplay[i].marketVal = (stock.numShares * newPortfolioListDisplay[i].currPrice).toFixed(2);
-                  this.myPortfolioDisplay = newPortfolioListDisplay;
-                  console.log("portfolio change: the updated portfolio display: ", JSON.stringify(this.myPortfolioDisplay));
-                  break;
-                }
+
+
+
+                newPortfolioListDisplay[i].numShares = stock.numShares.toFixed(2);
+                newPortfolioListDisplay[i].avgPrice = stock.avgPrice.toFixed(2);
+                newPortfolioListDisplay[i].totalCost = stock.cost.toFixed(2);
+                newPortfolioListDisplay[i].marketVal = (stock.numShares * newPortfolioListDisplay[i].currPrice).toFixed(2);
+                this.myPortfolioDisplay = newPortfolioListDisplay;
+                console.log("portfolio change: the updated portfolio display: ", JSON.stringify(this.myPortfolioDisplay));
+                break;
+
               }
             }
 

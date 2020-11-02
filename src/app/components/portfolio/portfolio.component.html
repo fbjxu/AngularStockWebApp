@@ -1,7 +1,7 @@
 <div *ngIf="showPortfolioList" class="container">
     <h1>My Portfolio</h1>
     <div class="no-item" *ngIf="myPortfolioDisplay.length==0">
-        <p>No results found. Please enter valid Ticker</p>
+        <p>Currently you don't have any stock</p>
     </div>
     <div *ngFor="let item of myPortfolioDisplay" class="card mb-3">
         <div class="card-header col-md-12 text-start">
