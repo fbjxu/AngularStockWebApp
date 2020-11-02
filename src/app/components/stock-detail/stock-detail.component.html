@@ -58,7 +58,7 @@
                     {{ livestockService.liveStockData.requestTime }} </p>
             </div>
         </div>
-        <div class="no-item" *ngIf="(livestockService.liveStockData.bidPrice==null)">
+        <div class="no-ticker" *ngIf="(livestockService.liveStockData.bidPrice==null)">
             Market Closed on {{ livestockService.liveStockData.liveTime }}
         </div>
         <div class="market-open" *ngIf="!(livestockService.liveStockData.bidPrice==null)">
@@ -103,7 +103,7 @@
                                 <p>{{ livestockService.liveStockData.description }}</p>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
+                        <div *ngIf = "livestockService.liveStockData.prevClose" class="col-md-6 col-sm-12">
                             <app-daily-chart [ticker]="ticker" [prevClose]="livestockService.liveStockData.prevClose"
                                 [bidPrice] = "livestockService.liveStockData.bidPrice" [timestamp] = "livestockService.liveStockData.liveTime">
                             </app-daily-chart>
@@ -113,12 +113,16 @@
             </mat-tab>
             <mat-tab label="Top News">
                 <ng-template matTabContent>
-                    <app-news [ticker]="ticker"></app-news>
+                    <div *ngIf = "ticker">
+                        <app-news [ticker]="ticker"></app-news>
+                    </div>
                 </ng-template>
             </mat-tab>
             <mat-tab label="Charts">
                 <ng-template matTabContent>
-                    <app-history-chart [ticker]="ticker"></app-history-chart>
+                    <div *ngIf = "livestockService.liveStockData.prevClose">
+                        <app-history-chart [ticker]="ticker"></app-history-chart>
+                    </div>
                 </ng-template>
             </mat-tab>
         </mat-tab-group>

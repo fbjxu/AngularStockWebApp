@@ -43,7 +43,7 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.dataService.getHistoryChart(this.ticker).subscribe(
       data=> {
-        console.log("data ready for history chart: "+ JSON.stringify(data));
+        // console.log("data ready for history chart: "+ JSON.stringify(data));
         var ohlc = [];
         var volume = [];
         var dataLength = data.length;
@@ -69,8 +69,8 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
               data[i].volume // the volume
           ]);
         }
-        console.log(JSON.stringify(ohlc));
-        console.log(JSON.stringify(volume));
+        // console.log(JSON.stringify(ohlc));
+        // console.log(JSON.stringify(volume));
         this.options = {
             rangeSelector: {
                 selected: 2
