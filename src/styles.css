@@ -15,11 +15,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
     color: red;
 }
 
-.no-item {
+.no-ticker {
     text-align: center;
     background-color: #f5d7d9;
     padding: 1%;
     color: gray;
+    margin:2%;
+}
+
+.no-item {
+    text-align: center;
+    background-color: #fef3ca;
+    padding: 1%;
+    color: gray;
+    margin:2%;
 }
 
 .market-open {

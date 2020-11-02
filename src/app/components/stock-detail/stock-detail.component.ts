@@ -6,6 +6,7 @@ import { LivestockService } from '../../services/livestock.service';
 import { startWith } from 'rxjs/operators';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { WatchlistmanagerService } from '../../services/watchlistmanager.service';
+import { HttpClient } from '@angular/common/http';
 //pop up news window
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewsWindowComponent } from '../news-window/news-window.component';
@@ -22,11 +23,12 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
   ticker: string;
   showSummary: boolean = false;
   yellowStar;
-
   refreshRate:number = 15000; //divide 1000 to
+  showWarning = false;
 
   //stock info
   constructor(
+    public http:HttpClient,
     private modalService: NgbModal, 
     private watchlistmanager:WatchlistmanagerService,
     private livestockService: LivestockService,
@@ -35,6 +37,14 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
     this.spinnerService.visible();
     this.componentLayoutService.makeInvisible(); //make search section disappear
     this.ticker = this.route.snapshot.params['ticker']; //set ticker
+    this.dataService.getSummary(this.ticker).subscribe(
+      data=> {
+        if((data.ticker?data.ticker:"").length == 0) {
+          this.showWarning = true;
+          this.showSummary = false;
+        }
+      }
+    )
     this.livestockService.liveStockServiceInit(this.ticker);
     this.yellowStar = this.watchlistmanager.yellowStar(this.ticker);
     console.log(this.yellowStar);
@@ -63,13 +73,11 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.spinnerService.invisible();
-    console.log("ngafter in stock detail " +this.livestockService.liveStockData.ticker)
+    console.log("ngafter in stock detail " +this.livestockService.liveStockData.ticker);
+    if(this.showWarning == false) {
+      this.showSummary = true;
+    }
     
-    this.livestockService.validCheck$.subscribe(
-      data=>{
-        this.showSummary = data;
-      }
-    );
   }
 
   showBuyDialog() {

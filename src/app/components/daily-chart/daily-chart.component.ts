@@ -28,6 +28,8 @@ noData(Highcharts);
 export class DailyChartComponent implements OnInit {
   @Input() ticker:string;
   @Input() prevClose: string;
+  @Input() bidPrice: number;
+  @Input() timestamp: string;
   price_series:any[];
   volume_series:any[];
   public options: any; 
@@ -61,43 +63,77 @@ export class DailyChartComponent implements OnInit {
   }
 
   ngOnInit(){
-    const source = interval(15000);//15 s refresh
-    this.subscription = source.pipe(startWith(0)).subscribe(val => this.getApiResponse(this.ticker).
-    then(
-        data => {
-            const updated_normal_data = [];
-            const updated_abnormal_data = [];
-            var latest_data = data[data.length-1];
-            if (latest_data.close>=parseFloat(this.prevClose)) {
-                this.stockUp = "green";
-            } 
-            else{
-                this.stockUp = "red";
-            }
-            data.forEach(dayData => {
-                const temp_row = [
-                    Date.parse(dayData.date),
-                    dayData.close
-                ];
-                updated_normal_data.push(temp_row);
-            });
-            this.options.series[0]['data'] = updated_normal_data;
-            this.options.series[0]['color'] = this.stockUp;
-            HighchartsStock.stockChart('daily', this.options);
-            },
-            error => {
-            console.log('Something went wrong.');
-            })
-    );
+      console.log("check timestamp "+ this.timestamp);
+      console.log("check bidPrice "+this.bidPrice);
+    if(this.bidPrice ==  null) {
+        this.getClosedApiResponse(this.ticker).subscribe(
+            data => {
+                const updated_normal_data = [];
+                const updated_abnormal_data = [];
+                var latest_data = data[data.length-1];
+                if (latest_data.close>=parseFloat(this.prevClose)) {
+                    this.stockUp = "green";
+                } 
+                else{
+                    this.stockUp = "red";
+                }
+                data.forEach(dayData => {
+                    const temp_row = [
+                        Date.parse(dayData.date),
+                        dayData.close
+                    ];
+                    updated_normal_data.push(temp_row);
+                });
+                this.options.series[0]['data'] = updated_normal_data;
+                this.options.series[0]['color'] = this.stockUp;
+                HighchartsStock.stockChart('daily', this.options);
+                }
+        )
+    }
+    else {
+        const source = interval(15000);//15 s refresh
+        this.subscription = source.pipe(startWith(0)).subscribe(val => this.getOpenApiResponse(this.ticker).
+        then(
+            data => {
+                const updated_normal_data = [];
+                const updated_abnormal_data = [];
+                var latest_data = data[data.length-1];
+                if (latest_data.close>=parseFloat(this.prevClose)) {
+                    this.stockUp = "green";
+                } 
+                else{
+                    this.stockUp = "red";
+                }
+                data.forEach(dayData => {
+                    const temp_row = [
+                        Date.parse(dayData.date),
+                        dayData.close
+                    ];
+                    updated_normal_data.push(temp_row);
+                });
+                this.options.series[0]['data'] = updated_normal_data;
+                this.options.series[0]['color'] = this.stockUp;
+                HighchartsStock.stockChart('daily', this.options);
+                },
+                error => {
+                console.log('Something went wrong.');
+                })
+        );
+    }
   }
 
-  getApiResponse(ticker:string) {
+  getOpenApiResponse(ticker:string) {
       console.log("daily chart data is called");
       return this.http.get<dailyPrice[]>('http://localhost:80/api/dailychartsummary/'+ticker, {})
       .toPromise().then(res => {
           return res;
       })
   }
+
+  getClosedApiResponse(ticker:string) {
+    console.log("daily chart data is called");
+    return this.http.get<dailyPrice[]>('http://localhost:80/api/dailychartsummaryclosed/'+ticker+"/"+this.timestamp.substring(0,10));
+}
 
   ngOnDestroy() {
       this.subscription.unsubscribe();

@@ -74,7 +74,17 @@ app.get('/api/pricesummary/:ticker', function (req, res) {
 app.get('/api/dailychartsummary/:ticker', function (req, res) {
     var startDate  
     console.log("dailychart API", "https://api.tiingo.com/iex/"+req.params.ticker+"/prices?"+token+"&startDate="+today+"&resampleFreq=4min&columns=close,volume");
-    fetch("https://api.tiingo.com/iex/"+req.params.ticker+"/prices?"+token+"&startDate="+prevDate+"&resampleFreq=4min&columns=close,volume", {
+    fetch("https://api.tiingo.com/iex/"+req.params.ticker+"/prices?"+token+"&startDate="+today+"&resampleFreq=4min&columns=close,volume", {
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(data=>{res.json(data)});
+});
+
+//API: dailyChart closed
+app.get('/api/dailychartsummaryclosed/:ticker/:date', function (req, res) {
+    var startDate  
+    fetch("https://api.tiingo.com/iex/"+req.params.ticker+"/prices?"+token+"&startDate="+req.params.date+"&resampleFreq=4min&columns=close,volume", {
         headers: { 'Content-Type': 'application/json' }
     })
     .then(res => res.json())

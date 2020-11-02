@@ -1,11 +1,11 @@
 <div class="root">
-    <div *ngIf="!showSummary" class="container">
-        <div class="no-item" *ngIf="(livestockService.liveStockData.bidPrice==null)">
+    <div *ngIf="showWarning" class="container">
+        <div class="no-ticker" *ngIf="(livestockService.liveStockData.bidPrice==null)">
             No results found. Please enter valid Ticker
         </div>
     </div>
 
-    <div *ngIf="showSummary" class="container">
+    <div *ngIf="showSummary && !showWarning" class="container">
         <div class="row">
             <div class="col">
                 <h2>{{ livestockService.liveStockData.ticker}}
@@ -104,7 +104,8 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <app-daily-chart [ticker]="ticker" [prevClose]="livestockService.liveStockData.prevClose">
+                            <app-daily-chart [ticker]="ticker" [prevClose]="livestockService.liveStockData.prevClose"
+                                [bidPrice] = "livestockService.liveStockData.bidPrice" [timestamp] = "livestockService.liveStockData.liveTime">
                             </app-daily-chart>
                         </div>
                     </div>
