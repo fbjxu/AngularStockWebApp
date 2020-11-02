@@ -89,6 +89,7 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
     modelRef.componentInstance.ticker = this.ticker;
     modelRef.componentInstance.name = this.livestockService.liveStockData.name;
     modelRef.componentInstance.isBuy = true;
+    modelRef.componentInstance.price = this.livestockService.liveStockData.last;
   }
 
   ngOnDestroy() {
