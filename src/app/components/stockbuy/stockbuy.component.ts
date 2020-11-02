@@ -21,7 +21,7 @@ export class StockbuyComponent implements OnInit {
   @Input() public maxNumShares: number;
   subscription:Subscription;
   numShares:number= 0;
-  @Input() public price: string;
+  @Input() public price: number;
   
 
   constructor(
@@ -39,7 +39,7 @@ export class StockbuyComponent implements OnInit {
           })).subscribe(data => {
             var price = data[0];
             console.log("stock buy price ready ", price);
-            this.price = price.last.toFixed(2);
+            this.price = Math.round(price.last * 100) / 100;
           })
         }
       );
