@@ -63,7 +63,13 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.spinnerService.invisible();
-    this.showSummary = true;
+    console.log("ngafter in stock detail " +this.livestockService.liveStockData.ticker)
+    
+    this.livestockService.validCheck$.subscribe(
+      data=>{
+        this.showSummary = data;
+      }
+    );
   }
 
   showBuyDialog() {

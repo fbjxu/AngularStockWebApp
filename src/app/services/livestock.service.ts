@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Data } from '@angular/router';
-import { Observable, interval, Subscription } from 'rxjs';
+import { Observable, interval, Subscription, BehaviorSubject, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { dailyPrice } from '../models/dailyPrice';
 import { tickerPrice } from '../models/tickerPrice';
@@ -18,6 +18,7 @@ export class LivestockService {
   subscription: Subscription;
   dailyChartRawData: dailyPrice[];
   liveStockData: liveStockInfo = new liveStockInfo();
+  public validCheck$ = new Subject<boolean>();
 
   constructor(private dataService: DataServiceService) {
   }
@@ -33,6 +34,9 @@ export class LivestockService {
     summaryObserve = this.dataService.getSummary(ticker);
     summaryObserve.subscribe((summaryData: companySummary) => {//get summary
       this.liveStockData.ticker = summaryData.ticker;
+      if(summaryData.ticker.length>0) {
+        this.validCheck$.next(true);
+      }
       this.liveStockData.name = summaryData.name;
       this.liveStockData.exchangeCode = summaryData.exchangeCode;
       this.liveStockData.description = summaryData.description;

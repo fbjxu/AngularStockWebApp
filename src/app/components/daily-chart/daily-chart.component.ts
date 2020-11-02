@@ -89,13 +89,6 @@ export class DailyChartComponent implements OnInit {
             console.log('Something went wrong.');
             })
     );
-    //   for (let dayData of dailyData) {
-    //     var time = Date.parse(dayData.date);
-    //     if(dayData.date!=null){
-    //         this.price_series.push([time, dayData.close]);
-    //     }
-    //   }
-      
   }
 
   getApiResponse(ticker:string) {

@@ -10,6 +10,7 @@ import { companySummary } from '../models/companySummary';
 import { tickerPrice } from '../models/tickerPrice';
 import { autoCompleteEntry } from '../models/autoCompleteEntry';
 import { dailyPrice } from '../models/dailyPrice';
+import { historyPrice } from '../models/historyPrice';
 
 const retryTimer = 5000;
 
@@ -75,6 +76,23 @@ export class DataServiceService {
     return this.http.get<dailyPrice[]>('http://localhost:80/api/dailychartsummary/'+ticker).pipe(
       map(res => {
         let result: dailyPrice[];
+        result =res;
+        return result;
+      }),
+      retryWhen(errors =>
+        errors.pipe(
+          // Retry the query again in 0.5 sec
+          delayWhen(val => timer(retryTimer))
+        )
+      )
+    );
+  }
+
+  public getHistoryChart(ticker: string): Observable<historyPrice[]> {
+    let observable: Observable<historyPrice[]>;
+    return this.http.get<historyPrice[]>('http://localhost:80/api/historychartsummary/'+ticker).pipe(
+      map(res => {
+        let result: historyPrice[];
         result =res;
         return result;
       }),
