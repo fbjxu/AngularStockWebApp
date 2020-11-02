@@ -67,7 +67,7 @@
 
         <mat-tab-group mat-stretch-tabs>
             <mat-tab label="Summary">
-                <ng-template matTabContent>
+                <!-- <ng-template matTabContent> -->
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div>
@@ -109,18 +109,20 @@
                             </app-daily-chart>
                         </div>
                     </div>
-                </ng-template>
+                <!-- </ng-template> -->
             </mat-tab>
             <mat-tab label="Top News">
-                <ng-template matTabContent>
+                <!-- <ng-template matTabContent> -->
                     <div *ngIf = "ticker">
                         <app-news [ticker]="ticker"></app-news>
                     </div>
-                </ng-template>
+                <!-- </ng-template> -->
             </mat-tab>
+            
             <mat-tab label="Charts">
                 <ng-template matTabContent>
-                    <div *ngIf = "livestockService.liveStockData.prevClose">
+                    <div id="text"></div>
+                    <div>
                         <app-history-chart [ticker]="ticker"></app-history-chart>
                     </div>
                 </ng-template>

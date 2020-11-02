@@ -11,18 +11,18 @@ declare var require: any;
 let Boost = require('highcharts/modules/boost');
 let noData = require('highcharts/modules/no-data-to-display');
 let More = require('highcharts/highcharts-more');
-var HighchartsStock = require('highcharts/highstock'); 
+var HighchartsStockHistory = require('highcharts/highstock'); 
 var vbp = require('highcharts/indicators/volume-by-price');
 let indicators = require('highcharts/indicators/indicators');
 
 
-indicators(HighchartsStock);
-Boost(HighchartsStock);
-noData(HighchartsStock);
-More(HighchartsStock);
-noData(HighchartsStock);
-More(HighchartsStock);
-vbp(HighchartsStock);
+indicators(HighchartsStockHistory);
+Boost(HighchartsStockHistory);
+noData(HighchartsStockHistory);
+More(HighchartsStockHistory);
+noData(HighchartsStockHistory);
+More(HighchartsStockHistory);
+vbp(HighchartsStockHistory);
 
 @Component({
   selector: 'app-history-chart',
@@ -31,19 +31,20 @@ vbp(HighchartsStock);
 })
 export class HistoryChartComponent implements OnInit, AfterViewInit {
   @Input() ticker:string;
-  public options: any;
+  public historyOptions: any;
   constructor(
     public spinnerService:SpinnerService,
     private http: HttpClient,
     public dataService:DataServiceService
   ) { 
-      this.spinnerService.visible();
   }
 
   ngOnInit(): void {
-    this.dataService.getHistoryChart(this.ticker).subscribe(
+    this.spinnerService.visible();
+    console.log("get ticker" +this.ticker);
+    this.http.get<historyPrice[]>('http://localhost:80/api/historychartsummary/'+this.ticker).subscribe(
       data=> {
-        // console.log("data ready for history chart: "+ JSON.stringify(data));
+        console.log("data ready for history chart: "+ JSON.stringify(data));
         var ohlc = [];
         var volume = [];
         var dataLength = data.length;
@@ -71,7 +72,7 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
         }
         // console.log(JSON.stringify(ohlc));
         // console.log(JSON.stringify(volume));
-        this.options = {
+        this.historyOptions = {
             rangeSelector: {
                 selected: 2
             },
@@ -156,7 +157,9 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
                 }
             }]
         }
-        HighchartsStock.stockChart('test',this.options);
+        console.log("over here!!!!!!!!");
+        HighchartsStockHistory.stockChart('text',this.historyOptions);
+        console.log("over there!!!!!!!!");
       }
     )
   }

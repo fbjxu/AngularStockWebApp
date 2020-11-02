@@ -72,11 +72,14 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    this.spinnerService.invisible();
-    console.log("ngafter in stock detail " +this.livestockService.liveStockData.ticker);
-    if(this.showWarning == false) {
-      this.showSummary = true;
-    }
+    setTimeout(()=> {
+      this.spinnerService.invisible();
+      console.log("ngafter in stock detail " +this.livestockService.liveStockData.ticker);
+      if(this.showWarning == false) {
+        this.showSummary = true;
+      }
+    }, 1500);
+    
     
   }
 
