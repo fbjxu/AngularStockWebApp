@@ -83,7 +83,7 @@ export class DailyChartComponent implements OnInit {
             });
             this.options.series[0]['data'] = updated_normal_data;
             this.options.series[0]['color'] = this.stockUp;
-            HighchartsStock.stockChart('test', this.options);
+            HighchartsStock.stockChart('daily', this.options);
             },
             error => {
             console.log('Something went wrong.');
@@ -92,6 +92,7 @@ export class DailyChartComponent implements OnInit {
   }
 
   getApiResponse(ticker:string) {
+      console.log("daily chart data is called");
       return this.http.get<dailyPrice[]>('http://localhost:80/api/dailychartsummary/'+ticker, {})
       .toPromise().then(res => {
           return res;
