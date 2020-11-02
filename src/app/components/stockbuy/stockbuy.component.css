@@ -12,3 +12,8 @@
 .buy-footer {
     text-align: left;
 }
+
+.btn-not-ready {
+    background-color:#87c582;
+    color: white;
+}

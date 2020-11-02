@@ -12,6 +12,7 @@ export class StockbuyComponent implements OnInit {
   @Input() public ticker:string;
   @Input() public name: string;
   @Input() public isBuy: boolean = true;
+  @Input() public maxNumShares: number;
   numShares:number= 0;
   price: number = 100;
   
@@ -22,6 +23,7 @@ export class StockbuyComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    console.log("max num shares is", this.maxNumShares);
   }
 
   buyStock(ticker:string, name:string, numShares: number, price: number) {
