@@ -34,6 +34,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 .market-open {
     text-align: center;
     background-color: #d7edda;
-    padding: 1%;
     color: #33634e;
+    width: fit-content;
+    margin-left: 50%;
+}
+
+.market-close {
+    text-align: center;
+    background-color: #f5d7d9;
+    width: fit-content;
+    margin-left: 50%;
 }

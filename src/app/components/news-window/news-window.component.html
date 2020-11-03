@@ -12,10 +12,10 @@
 <p>  {{ this.news.description }}</p>
 <p class="info-text">For more details click <a href="{{ news.url }}">here</a></p>
 <div class="card">
-    <p>Share</p>
+    <p class="share">Share</p>
     <span>
         <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?text={{ news.title + ' ' + news.url}}"></a>
-        <span class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ news.url }}" class="fa fa-facebook fb-xfbml-parse-ignore"></a></span>
+        <a class="fb-share-button fb-icon" data-href="https://developers.facebook.com/docs/plugins/" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ news.url }}" class="fa fa-facebook-square fb-xfbml-parse-ignore"></a>
     </span>
     
 </div>

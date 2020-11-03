@@ -96,7 +96,7 @@ export class LivestockService {
     let minutes = date_input.getMinutes();
     // current seconds
     let seconds = date_input.getSeconds();
-    return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+    return year + "-" + month + "-" + date + " " + ((hours<10)?("0"+hours):hours) + ":" + ((minutes<10)?("0"+minutes):minutes) + ":" + ((seconds<10)?("0"+seconds):seconds);
   }
 
   public destroyCleanup() {

@@ -14,18 +14,22 @@
     font-size: 0.7rem;
 }
 
-.fa-facebook {
+.fb-icon {
     display: inline-block;
-    background: #3B5998;
+    background: #1123fc;
     color: white;
   }
 
 .fa {
-    padding: 2%;
+    padding: 0%;
     font-size: 45px;
     width: 15%;
     text-align: center;
     text-decoration: none;
-    margin: 5px 2px;
+    margin: 0px;
     display: inline-block;
+  }
+
+  .share {
+      margin-left: 3%;
   }

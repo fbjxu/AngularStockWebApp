@@ -14,3 +14,34 @@
 .stat-table {
    margin-left: 15%;
 }
+
+.header-ticker {
+    margin-top: 3%;
+    font-size: 2.5rem;
+
+}
+
+.header-name {
+    margin-top: 3%;
+    font-size: 1.5rem;
+}
+
+.header-price {
+    font-size: 2.5rem;
+}
+
+.header-change {
+    font-size: 1.5rem;
+
+}
+
+.star {
+    vertical-align: text-top;
+}
+
+.header-right {
+    margin-top: 3%;
+    margin-right: 0%;
+    text-align: right;
+}
+
