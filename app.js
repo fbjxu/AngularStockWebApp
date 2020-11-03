@@ -5,6 +5,7 @@ const fetch = require('node-fetch');
 var app = express();
 app.use(cors());
 const path = require('path');
+var portNum = 8080;
 // console.log(__dirname);
 
 //helper attributes
@@ -131,6 +132,6 @@ app.get('/api/news/:ticker', function (req, res) {
 
 
 //Open port
-app.listen(3080, function () {
-console.log('CORS- enabled web server listening on port 8080')
+app.listen(portNum, function () {
+    console.log('CORS- enabled web server listening on port: ', portNum);
 });

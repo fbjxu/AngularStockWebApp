@@ -32,6 +32,7 @@ vbp(HighchartsStockHistory);
 export class HistoryChartComponent implements OnInit, AfterViewInit {
   @Input() ticker:string;
   public historyOptions: any;
+  localTesting:string = "http://localhost:8080";
   constructor(
     public spinnerService:SpinnerService,
     private http: HttpClient,
@@ -42,9 +43,9 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.spinnerService.visible();
     console.log("get ticker" +this.ticker);
-    this.http.get<historyPrice[]>('/api/historychartsummary/'+this.ticker).subscribe(
+    this.http.get<historyPrice[]>(this.localTesting+'/api/historychartsummary/'+this.ticker).subscribe(
       data=> {
-        console.log("data ready for history chart: "+ JSON.stringify(data));
+        // console.log("data ready for history chart: "+ JSON.stringify(data));
         var ohlc = [];
         var volume = [];
         var dataLength = data.length;

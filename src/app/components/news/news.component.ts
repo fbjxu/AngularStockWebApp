@@ -18,6 +18,7 @@ import { NewsWindowComponent } from '../news-window/news-window.component';
 export class NewsComponent implements OnInit {
   @Input() ticker: string;
   newsCollection:newsItem[] = []; 
+  localTesting:string = "http://localhost:8080";
 
   constructor(
     public spinnerService:SpinnerService,
@@ -35,7 +36,7 @@ export class NewsComponent implements OnInit {
   }
 
   getApiResponse(ticker:string) {
-    return this.http.get<newsItem[]>('/api/news/'+ticker, {})
+    return this.http.get<newsItem[]>(this.localTesting+'/api/news/'+ticker, {})
     .toPromise().then(res => {
         return res;
     })

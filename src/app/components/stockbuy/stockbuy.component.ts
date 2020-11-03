@@ -22,7 +22,7 @@ export class StockbuyComponent implements OnInit {
   subscription:Subscription;
   numShares:number= 0;
   @Input() public price: number;
-  
+  localTesting:string = "http://localhost:8080";
 
   constructor(
     public http: HttpClient,
@@ -31,7 +31,7 @@ export class StockbuyComponent implements OnInit {
       const source = interval(15000);//refresh price every 15 mins
       this.subscription = source.subscribe(val=> 
         {
-          this.http.get<tickerPrice[]>('/api/pricesummary/'+this.ticker).pipe(
+          this.http.get<tickerPrice[]>(this.localTesting+'/api/pricesummary/'+this.ticker).pipe(
           map(res => {
             let result: tickerPrice[];
             result =res;

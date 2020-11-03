@@ -22,12 +22,12 @@ const retryTimer = 5000;
 export class DataServiceService {
   //TODO: implement cache
   private api = "/api/";
-
+  localTesting:string = "http://localhost:8080";
   constructor(private http: HttpClient) { }
 
   //get summary method
   public getSummary(ticker: string): Observable<companySummary> {
-    return this.http.get<companySummary>('/api/summary/'+ticker).pipe(
+    return this.http.get<companySummary>(this.localTesting+'/api/summary/'+ticker).pipe(
       map(res => {
           let result: companySummary;
           result = res;
@@ -43,7 +43,7 @@ export class DataServiceService {
   }
 
   public getPrice(ticker: string): Observable<tickerPrice[]> {
-    return this.http.get<tickerPrice[]>('/api/pricesummary/'+ticker).pipe(
+    return this.http.get<tickerPrice[]>(this.localTesting+'/api/pricesummary/'+ticker).pipe(
       map(res => {
         let result: tickerPrice[];
         result =res;
@@ -62,7 +62,7 @@ export class DataServiceService {
 
   public getAutoComplete(input: string): Observable<autoCompleteEntry[]> {
 
-    return this.http.get<autoCompleteEntry[]>('/api/autocomplete/'+input).pipe(
+    return this.http.get<autoCompleteEntry[]>(this.localTesting+'/api/autocomplete/'+input).pipe(
       map(res => {
         let result: autoCompleteEntry[];
         result =res;
@@ -73,7 +73,7 @@ export class DataServiceService {
 
   public getDailyChart(ticker: string): Observable<dailyPrice[]> {
     let observable: Observable<dailyPrice[]>;
-    return this.http.get<dailyPrice[]>('/api/dailychartsummary/'+ticker).pipe(
+    return this.http.get<dailyPrice[]>(this.localTesting+'/api/dailychartsummary/'+ticker).pipe(
       map(res => {
         let result: dailyPrice[];
         result =res;
@@ -90,7 +90,7 @@ export class DataServiceService {
 
   public getHistoryChart(ticker: string): Observable<historyPrice[]> {
     let observable: Observable<historyPrice[]>;
-    return this.http.get<historyPrice[]>('/api/historychartsummary/'+ticker).pipe(
+    return this.http.get<historyPrice[]>(this.localTesting+'/api/historychartsummary/'+ticker).pipe(
       map(res => {
         let result: historyPrice[];
         result =res;
