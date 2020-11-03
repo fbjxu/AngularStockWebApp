@@ -71,33 +71,67 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div>
-                                <table>
-                                    <tr>
-                                        <td>High Price: {{ livestockService.liveStockData.high }}</td>
-                                        <td *ngIf="!(livestockService.liveStockData.bidPrice==null)">Mid Price:
-                                            {{ livestockService.liveStockData.mid }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Low Price: {{ livestockService.liveStockData.low }}</td>
-                                        <td *ngIf="!(livestockService.liveStockData.bidPrice==null)">Ask Price:
-                                            {{ livestockService.liveStockData.askPrice }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Open Price: {{ livestockService.liveStockData.open }}</td>
-                                        <td *ngIf="!(livestockService.liveStockData.bidPrice==null)">Ask Size:
-                                            {{ livestockService.liveStockData.askSize }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Prev. Close: {{ livestockService.liveStockData.prevClose }}</td>
-                                        <td *ngIf="!(livestockService.liveStockData.bidPrice==null)">Bid Price:
-                                            {{ livestockService.liveStockData.bidPrice }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Volume: {{ livestockService.liveStockData.volume }}</td>
-                                        <td *ngIf="!(livestockService.liveStockData.bidPrice==null)">Bid Size:
-                                            {{ livestockService.liveStockData.bidSize }}</td>
-                                    </tr>
-                                </table>
+                                <div class="row">
+                                    <div class="col stat-table ">
+                                        <table>
+                                            <tr>
+                                                <td>High Price:</td>
+                                                <td>{{ livestockService.liveStockData.high }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Low Price:</td>
+                                                <td> {{ livestockService.liveStockData.low }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Open Price:</td>
+                                                <td> {{ livestockService.liveStockData.open }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Prev. Close:</td>
+                                                <td> {{ livestockService.liveStockData.prevClose }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Volume:</td>
+                                                <td>{{ livestockService.liveStockData.volume }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <table *ngIf="!(livestockService.liveStockData.bidPrice==null)">
+                                            <tr>
+                                                <td>Mid Price:</td>
+                                                <td>
+                                                    {{ livestockService.liveStockData.mid }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ask Price:</td>
+                                                <td>
+                                                    {{ livestockService.liveStockData.askPrice }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ask Size:</td>
+                                                <td>
+                                                    {{ livestockService.liveStockData.askSize }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Bid Price:</td>
+                                                <td>
+                                                        {{ livestockService.liveStockData.bidPrice }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Bid Size:
+                                                </td>
+                                                <td>
+                                                    {{ livestockService.liveStockData.bidSize }}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    
+                                </div>
                                 <h2 id="company-description"><b>Company's Description</b></h2>
                                 <p>Start Date: {{ livestockService.liveStockData.startDate }} </p>
                                 <p>{{ livestockService.liveStockData.description }}</p>
