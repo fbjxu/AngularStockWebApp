@@ -1,13 +1,13 @@
-<div class="search-component">
-    <h1>Search Stock</h1>
-    <form (ngSubmit)="onSubmit()">
+<div class="search-component container">
+    <h1 class = "header-ticker">STOCK SEARCH</h1>
+    <form (ngSubmit)="onSubmit()" class= "col-sm 8 col-md-4 search-bar">
 
             <div class="rounded-pill search-icon-border">
                 <div class="input-group">
                     <input type="text" matInput [matAutocomplete]="auto" [formControl]="myControl"
                         name = "title" [(ngModel)]="title" aria-describedby="button-addon1" class="form-control rounded-pill border-0">
                     <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i
-                            class="fa fa-search"></i></button>
+                            class="fa fa-search fa-color"></i></button>
                 </div>
                 <mat-autocomplete #auto="matAutocomplete">
                     <mat-option  *ngIf="showAutoLoading">

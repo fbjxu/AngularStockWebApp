@@ -2,3 +2,15 @@
     background-color: #6f4ffb !important;
     color: white;
 }
+
+.header-btn:hover {
+    border: 0.15rem solid white;
+    border-radius: 0.5rem;
+    display: block;
+}
+
+.header-btn {
+    border: 0.15rem solid transparent;
+    border-radius: 0.8rem;
+    display: block;
+}

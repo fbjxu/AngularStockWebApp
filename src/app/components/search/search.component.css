@@ -1,4 +1,4 @@
-.fa {
+.fa-color {
     color: #6f4ffb !important;
 }
 
@@ -33,3 +33,18 @@
   .example-full-width {
     width: 100%;
   }
+
+.header-ticker {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 5%;
+    height: auto;
+    line-height: 1;
+
+}
+
+.search-bar {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}

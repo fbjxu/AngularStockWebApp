@@ -36,12 +36,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
     background-color: #d7edda;
     color: #33634e;
     width: fit-content;
-    margin-left: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .market-close {
     text-align: center;
     background-color: #f5d7d9;
     width: fit-content;
-    margin-left: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
