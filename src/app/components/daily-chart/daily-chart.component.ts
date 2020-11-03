@@ -124,7 +124,7 @@ export class DailyChartComponent implements OnInit {
 
   getOpenApiResponse(ticker:string) {
       console.log("daily chart data is called");
-      return this.http.get<dailyPrice[]>('http://localhost:80/api/dailychartsummary/'+ticker, {})
+      return this.http.get<dailyPrice[]>('/api/dailychartsummary/'+ticker, {})
       .toPromise().then(res => {
           return res;
       })
@@ -132,7 +132,7 @@ export class DailyChartComponent implements OnInit {
 
   getClosedApiResponse(ticker:string) {
     console.log("daily chart data is called");
-    return this.http.get<dailyPrice[]>('http://localhost:80/api/dailychartsummaryclosed/'+ticker+"/"+this.timestamp.substring(0,10));
+    return this.http.get<dailyPrice[]>('/api/dailychartsummaryclosed/'+ticker+"/"+this.timestamp.substring(0,10));
 }
 
   ngOnDestroy() {

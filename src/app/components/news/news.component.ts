@@ -35,7 +35,7 @@ export class NewsComponent implements OnInit {
   }
 
   getApiResponse(ticker:string) {
-    return this.http.get<newsItem[]>('http://localhost:80/api/news/'+ticker, {})
+    return this.http.get<newsItem[]>('/api/news/'+ticker, {})
     .toPromise().then(res => {
         return res;
     })

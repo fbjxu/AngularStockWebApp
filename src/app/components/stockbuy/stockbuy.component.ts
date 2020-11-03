@@ -31,7 +31,7 @@ export class StockbuyComponent implements OnInit {
       const source = interval(15000);//refresh price every 15 mins
       this.subscription = source.subscribe(val=> 
         {
-          this.http.get<tickerPrice[]>('http://localhost:80/api/pricesummary/'+this.ticker).pipe(
+          this.http.get<tickerPrice[]>('/api/pricesummary/'+this.ticker).pipe(
           map(res => {
             let result: tickerPrice[];
             result =res;

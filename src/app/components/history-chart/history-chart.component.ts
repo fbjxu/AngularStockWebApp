@@ -42,7 +42,7 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.spinnerService.visible();
     console.log("get ticker" +this.ticker);
-    this.http.get<historyPrice[]>('http://localhost:80/api/historychartsummary/'+this.ticker).subscribe(
+    this.http.get<historyPrice[]>('/api/historychartsummary/'+this.ticker).subscribe(
       data=> {
         console.log("data ready for history chart: "+ JSON.stringify(data));
         var ohlc = [];
