@@ -1,20 +1,11 @@
 <div class="container news-root row">
-    <div *ngFor="let news of newsCollection; let i = index" class="news-subroot col-md-6 col-sm-12" 
+    <div *ngFor="let news of newsCollection; let i = index" class="col-md-6 col-sm-12" 
         (click)="showNewsDialog(news)">
-        <div *ngIf="i%2 == 0" class="news-card row">
-            <div class="col-4">
+        <div class="news-card row">
+            <div class="col-md-4 col-sm-12" style="min-height: 50%;">
                 <img class="news-image" src="{{ news.urlToImage || '//:0' }}" />
             </div>
-            <div class="col-8">
-                <div class="news-title ">{{ news.title }} </div>
-            </div>
-        </div>
-
-        <div *ngIf="i%2 != 0" class="news-card row">
-            <div class="col-4">
-                <img class="news-image" src="{{ news.urlToImage || '//:0' }}" />
-            </div>
-            <div class="col-8">
+            <div class="col-md-8 col-sm-12" style="max-height: 40%; text-align: center; margin-top: auto; margin-bottom: auto;">
                 <div class="news-title ">{{ news.title }} </div>
             </div>
         </div>
