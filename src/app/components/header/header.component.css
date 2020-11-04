@@ -14,3 +14,16 @@
     border-radius: 0.8rem;
     display: block;
 }
+
+.navbar .navbar-nav {
+    text-align: right;
+
+  }
+
+  .stock-search-heade {
+      color: white;
+  }
+
+  .nav-link {
+      display: block;
+  }
