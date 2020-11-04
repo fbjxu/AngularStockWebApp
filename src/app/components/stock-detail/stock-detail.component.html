@@ -6,6 +6,24 @@
     </div>
 
     <div *ngIf="showSummary && !showWarning" class="container">
+        <div *ngIf="addWatchListAlert" class="addWatch">
+            {{ livestockService.liveStockData.ticker }} added to Watchlist
+            <button type="button" class="close close-icon" aria-label="Close" (click)="removeAlertForAddWatchList()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div *ngIf="removeWatchListAlert" class="removeWatch">
+            {{ livestockService.liveStockData.ticker }} removed from Watchlist
+            <button type="button" class="close close-icon" aria-label="Close" (click)="removeAlertForRemoveWatchList()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div *ngIf="buySuccess" class="removeWatch">
+            {{ livestockService.liveStockData.ticker }} bought successfully
+            <button type="button" class="close close-icon" aria-label="Close" (click)="removeAlertForBuySuccess()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <div class="row">
             <div class="col">
                 <h2 class="header-ticker">{{ livestockService.liveStockData.ticker}}

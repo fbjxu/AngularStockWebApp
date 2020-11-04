@@ -11,7 +11,7 @@ import { portfolioEntry } from '../models/portfolioEntry';
 })
 export class PortfoliomanagerService {
   public portfolioChange$:Subject<string> = new Subject<string>();
-
+  public buySuccess$:Subject<boolean> = new Subject<boolean>();
   constructor(private dataService:DataServiceService) { }
 
   public getPortfolioList(): portfolioEntry[] {//list of buy details
@@ -44,6 +44,7 @@ export class PortfoliomanagerService {
         stock.avgPrice = stock.cost / stock.numShares;
         this.setLocalStoragePortfolioList(portfolioList);//update local storage's portfolio number
         this.portfolioChange$.next(ticker_input.toLowerCase());
+        this.buySuccess$.next(true);
         console.log("inside buystock: added existed stock now the portfolio is: ", portfolioList);
         return;
       }

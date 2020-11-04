@@ -6,6 +6,7 @@ import { LivestockService } from '../../services/livestock.service';
 import { startWith } from 'rxjs/operators';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { WatchlistmanagerService } from '../../services/watchlistmanager.service';
+import { PortfoliomanagerService } from '../../services/portfoliomanager.service';
 import { HttpClient } from '@angular/common/http';
 //pop up news window
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -44,13 +45,17 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
 
   ticker: string;
   showSummary: boolean = false;
-  yellowStar;
+  yellowStar:boolean;
+  addWatchListAlert:boolean = false;
+  removeWatchListAlert:boolean = false;
+  buySuccess:boolean = false;
   refreshRate:number = 15000; //divide 1000 to
   showWarning = false;
   public historyOptions: any;
   localTesting:string = "http://localhost:8080";
   //stock info
   constructor(
+    public portfolioManager: PortfoliomanagerService,
     public http:HttpClient,
     private modalService: NgbModal, 
     private watchlistmanager:WatchlistmanagerService,
@@ -72,8 +77,26 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
     this.yellowStar = this.watchlistmanager.yellowStar(this.ticker);
     console.log(this.yellowStar);
     this.watchlistmanager.getYellowStar().
-      subscribe(starData =>this.yellowStar = starData
+      subscribe(starData =>{
+        this.yellowStar = starData;
+        if (starData) {
+          this.addWatchListAlert = true;
+          setTimeout(()=>{ this.addWatchListAlert = false; }, 5000);
+          
+        }
+        else {
+          this.removeWatchListAlert = true;
+          setTimeout(()=>{ this.removeWatchListAlert = false; }, 5000);
+        }
+      }
     );
+
+    this.portfolioManager.buySuccess$.subscribe(
+      buyData => {
+        this.buySuccess = true;
+        setTimeout(()=>{ this.buySuccess = false; }, 5000);
+      }
+    )
   }
 
   toggleStar() {
@@ -86,6 +109,18 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
 
   deleteTicker() {
     this.watchlistmanager.deleteTicker(this.ticker);
+  }
+
+  removeAlertForAddWatchList() {
+    this.addWatchListAlert = false;
+  }
+
+  removeAlertForRemoveWatchList() {
+    this.removeWatchListAlert = false;
+  }
+
+  removeAlertForBuySuccess() {
+    this.buySuccess = false;
   }
 
 

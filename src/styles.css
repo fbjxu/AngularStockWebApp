@@ -49,3 +49,30 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
     margin-left: auto;
     margin-right: auto;
 }
+
+.addWatch {
+    text-align: center;
+    background-color: #d7edda;
+    color: #33634e;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2%;
+    font-size: 1rem;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 0.3rem;
+}
+
+.removeWatch {
+    text-align: center;
+    background-color: #f5d7d9;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2%;
+    font-size: 1rem;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 0.3rem;
+}
