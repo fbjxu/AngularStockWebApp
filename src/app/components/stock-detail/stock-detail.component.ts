@@ -81,11 +81,13 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
         this.yellowStar = starData;
         if (starData) {
           this.addWatchListAlert = true;
+          this.removeWatchListAlert = false;
           setTimeout(()=>{ this.addWatchListAlert = false; }, 5000);
           
         }
         else {
           this.removeWatchListAlert = true;
+          this.addWatchListAlert = false;
           setTimeout(()=>{ this.removeWatchListAlert = false; }, 5000);
         }
       }

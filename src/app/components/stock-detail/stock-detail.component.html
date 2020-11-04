@@ -18,7 +18,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div *ngIf="buySuccess" class="removeWatch">
+        <div *ngIf="buySuccess" class="addWatch">
             {{ livestockService.liveStockData.ticker }} bought successfully
             <button type="button" class="close close-icon" aria-label="Close" (click)="removeAlertForBuySuccess()">
                 <span aria-hidden="true">&times;</span>
