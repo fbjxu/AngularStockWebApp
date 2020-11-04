@@ -1,4 +1,6 @@
 .spinner {
-    margin-left: 50%;
+    /* margin-left: 50%; */
     margin-top: 5%;
+    display: flex;
+    justify-content: center;
 }

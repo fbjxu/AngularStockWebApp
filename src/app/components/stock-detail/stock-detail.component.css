@@ -17,21 +17,22 @@
 
 .header-ticker {
     margin-top: 3%;
-    font-size: 2.5rem;
+    font-size: 2rem;
 
 }
 
 .header-name {
     margin-top: 3%;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    color:#6d747b;
 }
 
 .header-price {
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .header-change {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 
 }
 

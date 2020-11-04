@@ -1,8 +1,9 @@
 
 h1 {
-    font-size: 50px;
+    font-size: 2rem;
     font-weight: bold;
     margin: 2%;
+    line-height: 1;
 }
 
 .text-end {
@@ -15,12 +16,12 @@ h1 {
 
 .first-row {
     margin: 2%;
-    font-size: 40px;
+    font-size: 2.5rem;
 }
 
 .second-row {
     margin: 2%;
-    font-size: 15px;
+    font-size: 1rem;
 }
 
 .stock-card {

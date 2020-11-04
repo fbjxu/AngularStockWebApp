@@ -1,6 +1,6 @@
 
 .header-ticker {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
@@ -24,8 +24,8 @@
 }
 
 .second-row {
-    margin: 2%;
-    font-size: 15px;
+    margin: 1%;
+    font-size: 1rem;
 }
 
 .stock-card {
@@ -44,7 +44,8 @@
 }
 
 h1 {
-    font-size: 50px;
+    font-size: 2rem;
     font-weight: bold;
     margin: 2%;
+    line-height: 1;
 }
