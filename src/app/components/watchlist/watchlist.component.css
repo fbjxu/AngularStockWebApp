@@ -15,8 +15,9 @@ h1 {
 }
 
 .first-row {
+    padding-top: 3%;
     margin: 2%;
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .second-row {

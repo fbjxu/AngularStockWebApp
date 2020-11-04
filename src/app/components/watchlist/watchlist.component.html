@@ -5,8 +5,8 @@
     <div *ngFor="let item of myWatchListDisplay" class ="stock-card card" >
         <div (click) ="onClick(item.ticker)">
             <div class="row first-row">
-                <div class="col-md-6 text-start">{{ item.ticker }}</div>
-                <div class="col-md-6 text-end" [ngClass]="{
+                <div class="col-md-6 col-6 text-start">{{ item.ticker }}</div>
+                <div class="col-md-6  col-6 text-end" [ngClass]="{
                     'positive' : item.change > 0,
                     'negative' : item.change < 0}">
                     
@@ -14,8 +14,8 @@
                 </div>
             </div>
             <div class="row second-row">
-                <div class="col-md-6 text-start">{{ item.name }}</div>
-                <div class="col-md-6 text-end" [ngClass]="{
+                <div class="col-md-6 col-6 text-start">{{ item.name }}</div>
+                <div class="col-md-6 col-6 text-end" [ngClass]="{
                     'positive' : item.change > 0,
                     'negative' : item.change < 0}">
                     <span *ngIf="item.change > 0">
