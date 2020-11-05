@@ -40,23 +40,23 @@ function getPrevDate(date) {
 }
 
 // Serve only the static files form the dist directory
-// app.use(express.static(__dirname + '/dist/stock-web-app'));
+app.use(express.static(__dirname + '/dist/stock-web-app'));
 
-// app.get('/', function(req,res) {
-//     res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
-// });
+app.get('/', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
 
-// app.get('/watchlist', function(req,res) {
-//     res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
-// });
+app.get('/watchlist', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
 
-// app.get('/portfolio', function(req,res) {
-//     res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
-// });
+app.get('/portfolio', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
 
-// app.get('/details/:ticker', function(req,res) {
-//     res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
-// });
+app.get('/details/:ticker', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
 
 //API: automcomplete
 app.get('/api/autocomplete/:ticker', function (req, res) {
@@ -93,7 +93,7 @@ app.get('/api/pricesummary/:ticker', function (req, res) {
 //API: dailyChart
 app.get('/api/dailychartsummary/:ticker', function (req, res) {
     var startDate  
-    console.log("dailychart API", "https://api.tiingo.com/iex/"+req.params.ticker+"/prices?"+token+"&startDate="+today+"&resampleFreq=4min&columns=close,volume");
+    //console.log("dailychart API", "https://api.tiingo.com/iex/"+req.params.ticker+"/prices?"+token+"&startDate="+today+"&resampleFreq=4min&columns=close,volume");
     fetch("https://api.tiingo.com/iex/"+req.params.ticker+"/prices?"+token+"&startDate="+today+"&resampleFreq=4min&columns=close,volume", {
         headers: { 'Content-Type': 'application/json' }
     })
