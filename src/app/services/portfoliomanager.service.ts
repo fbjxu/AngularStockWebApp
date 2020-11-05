@@ -57,6 +57,7 @@ export class PortfoliomanagerService {
     this.setLocalStoragePortfolioTickers(portfolioTickers);
     this.portfolioChange$.next(ticker_input.toLowerCase());
     //console.log("inside buystock: added new stock: now the portfolio is", portfolioTickers);
+    this.buySuccess$.next(true);
     return;
   }
 
