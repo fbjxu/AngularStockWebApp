@@ -52,7 +52,7 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
   refreshRate:number = 15000; //divide 1000 to
   showWarning = false;
   public historyOptions: any;
-  localTesting:string = "http://localhost:8080";
+  localTesting:string = ""  
   //stock info
   constructor(
     public portfolioManager: PortfoliomanagerService,
