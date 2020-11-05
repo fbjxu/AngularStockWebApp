@@ -35,7 +35,7 @@ export class DailyChartComponent implements OnInit {
   public options: any; 
   subscription: Subscription;
   stockUp:string = "green";
-  localTesting:string = ""  
+  localTesting:string = "http://localhost:8080"  
 
   constructor(
       private livestockService:LivestockService,
