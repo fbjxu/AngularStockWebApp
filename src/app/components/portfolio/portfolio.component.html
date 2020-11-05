@@ -10,77 +10,87 @@
         <div class="card-body">
         <!-- first row -->
             <div class="row row-layout">
-                <div class="col-md-3 col-sm-6 col-6">
-                    <p class ="text-start portfolio-body">Quantity: </p>
+                <div class="col-md-6 col-12">
+                    <div class="row">
+                        <div class="col">
+                            <p class ="text-start portfolio-body">Quantity: </p>
+                        </div>
+                        <div class="col">
+                            <p class ="text-end portfolio-body">{{ item.numShares }} </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class ="text-start portfolio-body">Avg. Cost / Share: </p>
+                        </div>
+                        <div class="col">
+                            <p class ="text-end portfolio-body">{{ item.avgPrice }} </p> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class ="text-start portfolio-body">Toal Cost: </p>
+                        </div>
+                        <div class="col">
+                            <p class ="text-end portfolio-body">{{ item.totalCost }} </p> 
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-6">
-                    <p class ="text-end portfolio-body">{{ item.numShares }} </p> 
-                </div>
-                <div class="col-md-3 col-sm-6 col-6">
-                    <p class ="text-start portfolio-body">Change: </p>
-                </div>
-                <div class="col-md-3 col-sm-6 col-6">
-                    <div class ="text-end portfolio-body" 
-                    [ngClass]="{
-                        'positive' : (item.avgPrice - item.currPrice) > 0,
-                        'negative' : (item.avgPrice - item.currPrice) < 0}">
-                        <span *ngIf="(item.avgPrice - item.currPrice) > 0">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
-                            </svg>
-                        </span>
-                        <span *ngIf="(item.avgPrice - item.currPrice) < 0">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                            </svg>
-                        </span>
-                        {{ (item.avgPrice - item.currPrice).toFixed(2) }} 
-                    </div>  
-                </div>
-            
-            <!-- second row -->
-            
-                <div class="col-md-3 col-sm-6 col-6">
-                    <p class ="text-start portfolio-body">Avg. Cost / Share: </p>
-                </div>
-                <div class="col-md-3 col-sm-6 col-6">
-                    <p class ="text-end portfolio-body">{{ item.avgPrice }} </p> 
-                </div>
-                <div class="col-md-3 col-sm-6 col-6">
-                    <p class ="text-start portfolio-body">Current Price: </p>
-                </div>
-                <div class="col-md-3 col-sm-6 col-6">
-                    <div class ="text-end portfolio-body" 
-                    [ngClass]="{
-                        'positive' : (item.avgPrice - item.currPrice) > 0,
-                        'negative' : (item.avgPrice - item.currPrice) < 0}">
-                        {{ item.currPrice }} 
-                    </div> 
-                </div>
-       
 
-            <!-- third row -->
-           
-                <div class="col-md-3 col-sm-6 col-6">
-                    <p class ="text-start portfolio-body">Toal Cost: </p>
-                </div>
-                <div class="col-md-3 col-sm-6 col-6">
-                    <p class ="text-end portfolio-body">{{ item.totalCost }} </p> 
-                </div>
-                <div class="col-md-3 col-sm-6 col-6">
-                    <p class ="text-start portfolio-body">Market Value: </p>
-                </div>
-                <div class="col-md-3 col-sm-6 col-6">
-                    <div class ="text-end portfolio-body" 
-                    [ngClass]="{
-                        'positive' : (item.avgPrice - item.currPrice) > 0,
-                        'negative' : (item.avgPrice - item.currPrice) < 0}">
-                        {{ item.marketVal }} 
-                    </div> 
+                <div class="col-md-6 col-12">
+                    <div class="row">
+                        <div class="col">
+                            <p class ="text-start portfolio-body">Change: </p>
+                        </div>
+                        <div class="col">
+                            <div class ="text-end portfolio-body" 
+                            [ngClass]="{
+                                'positive' : (item.currPrice - item.avgPrice) > 0,
+                                'negative' : (item.currPrice - item.avgPrice) < 0}">
+                                <span *ngIf="(item.currPrice - item.avgPrice) > 0">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="currentColor"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                                    </svg>
+                                </span>
+                                <span *ngIf="(item.currPrice - item.avgPrice) < 0">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                    </svg>
+                                </span>
+                                {{ (item.currPrice - item.avgPrice).toFixed(2) }} 
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class ="text-start portfolio-body">Current Price: </p>
+                        </div>
+                        <div class="col">
+                            <div class ="text-end portfolio-body" 
+                            [ngClass]="{
+                                'positive' : (item.currPrice - item.avgPrice) > 0,
+                                'negative' : (item.currPrice - item.avgPrice) < 0}">
+                                {{ item.currPrice }} 
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class ="text-start portfolio-body">Market Value: </p>
+                        </div>
+                        <div class="col">
+                            <div class ="text-end portfolio-body" 
+                            [ngClass]="{
+                                'positive' : (item.currPrice - item.avgPrice) > 0,
+                                'negative' : (item.currPrice - item.avgPrice) < 0}">
+                                {{ item.marketVal }} 
+                            </div> 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>   

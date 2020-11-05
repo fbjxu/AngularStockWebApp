@@ -32,7 +32,7 @@ vbp(HighchartsStockHistory);
 export class HistoryChartComponent implements OnInit, AfterViewInit {
   @Input() ticker:string;
   public historyOptions: any;
-  localTesting:string = "" 
+  localTesting:string = "http://localhost:8080" 
   constructor(
     public spinnerService:SpinnerService,
     private http: HttpClient,
