@@ -22,7 +22,7 @@ export class StockbuyComponent implements OnInit {
   subscription:Subscription;
   numShares:number= 0;
   @Input() public price: number;
-  localTesting:string = "http://localhost:8080";
+  localTesting:string = "";
 
   constructor(
     public http: HttpClient,
@@ -38,7 +38,7 @@ export class StockbuyComponent implements OnInit {
             return result;
           })).subscribe(data => {
             var price = data[0];
-            console.log("stock buy price ready ", price);
+            //console.log("stock buy price ready ", price);
             this.price = Math.round(price.last * 100) / 100;
           })
         }
@@ -46,7 +46,7 @@ export class StockbuyComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log("max num shares is", this.maxNumShares);
+    //console.log("max num shares is", this.maxNumShares);
   }
 
   ngOnDestroy() {

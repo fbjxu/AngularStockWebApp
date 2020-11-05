@@ -35,7 +35,7 @@ export class DailyChartComponent implements OnInit {
   public options: any; 
   subscription: Subscription;
   stockUp:string = "green";
-  localTesting:string = "http://localhost:8080"  
+  localTesting:string = ""  
 
   constructor(
       private livestockService:LivestockService,
@@ -64,8 +64,8 @@ export class DailyChartComponent implements OnInit {
   }
 
   ngOnInit(){
-      console.log("check timestamp "+ this.timestamp);
-      console.log("check bidPrice "+this.bidPrice);
+    //   console.log("check timestamp "+ this.timestamp);
+    //   console.log("check bidPrice "+this.bidPrice);
     if(this.bidPrice ==  null) {
         this.getClosedApiResponse(this.ticker).subscribe(
             data => {
@@ -117,14 +117,14 @@ export class DailyChartComponent implements OnInit {
                 HighchartsStock.stockChart('daily', this.options);
                 },
                 error => {
-                console.log('Something went wrong.');
+                // console.log('Something went wrong.');
                 })
         );
     }
   }
 
   getOpenApiResponse(ticker:string) {
-      console.log("daily chart data is called");
+    //   console.log("daily chart data is called");
       return this.http.get<dailyPrice[]>(this.localTesting+'/api/dailychartsummary/'+ticker, {})
       .toPromise().then(res => {
           return res;
@@ -132,7 +132,7 @@ export class DailyChartComponent implements OnInit {
   }
 
   getClosedApiResponse(ticker:string) {
-    console.log("daily chart data is called");
+    // console.log("daily chart data is called");
     return this.http.get<dailyPrice[]>(this.localTesting+'/api/dailychartsummaryclosed/'+ticker+"/"+this.timestamp.substring(0,10));
 }
 

@@ -41,7 +41,7 @@ export class PortfolioComponent implements OnInit {
     //check price every 15s
     const source = interval(15000);//set interval to 15s
     this.subscription = source.pipe(startWith(0)).subscribe(val => {
-      console.log("called portfolio 15s subscription")
+      // console.log("called portfolio 15s subscription")
       let ticker_query = this.portfolioManager.getPortfolioTickerList().join(",");
       this.dataService.getPrice(ticker_query).subscribe(data => {
         var newPortfolioDisplay = [];
@@ -64,22 +64,22 @@ export class PortfolioComponent implements OnInit {
             }
           }
           this.myPortfolioDisplay = newPortfolioDisplay;
-          console.log("inside my portfolio display", JSON.stringify(this.myPortfolioDisplay))
+          // console.log("inside my portfolio display", JSON.stringify(this.myPortfolioDisplay))
         }
       })
     })
 
     this.portfolioManager.portfolioChange$.
       subscribe(data => {
-        console.log("portfolio change detected");
+        // console.log("portfolio change detected");
         for (var i = 0; i < this.myPortfolioDisplay.length; i++) {
           if (this.myPortfolioDisplay[i].ticker.toLowerCase() == data) {
             // console.log("portfolio change: stock;s position now changed to non-zero");
             // console.log("portfolio printing out data")
             var newPortfolioList = this.portfolioManager.getPortfolioList();
-            console.log("data is ", data, "data in updated list?:", this.portfolioManager.getPortfolioTickerList().includes(data))
+            // console.log("data is ", data, "data in updated list?:", this.portfolioManager.getPortfolioTickerList().includes(data))
             if (!(this.portfolioManager.getPortfolioTickerList().includes(data))) {
-              console.log("portfolio change: stock;s position now changed to zero");
+              // console.log("portfolio change: stock;s position now changed to zero");
               this.myPortfolioDisplay = this.myPortfolioDisplay.filter(item => item.ticker.toLowerCase() != data);
               break;
             }
@@ -94,7 +94,7 @@ export class PortfolioComponent implements OnInit {
                 newPortfolioListDisplay[i].totalCost = stock.cost.toFixed(2);
                 newPortfolioListDisplay[i].marketVal = (stock.numShares * newPortfolioListDisplay[i].currPrice).toFixed(2);
                 this.myPortfolioDisplay = newPortfolioListDisplay;
-                console.log("portfolio change: the updated portfolio display: ", JSON.stringify(this.myPortfolioDisplay));
+                // console.log("portfolio change: the updated portfolio display: ", JSON.stringify(this.myPortfolioDisplay));
                 break;
 
               }
@@ -108,7 +108,7 @@ export class PortfolioComponent implements OnInit {
   ngAfterViewInit() {
     this.spinnerService.invisible();
     this.showPortfolioList = true;
-    console.log(this.showPortfolioList);
+    //console.log(this.showPortfolioList);
   }
 
   ngOnDestroy(): void {

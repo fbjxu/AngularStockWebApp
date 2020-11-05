@@ -42,21 +42,21 @@ function getPrevDate(date) {
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/stock-web-app'));
 
-// app.get('/', function(req,res) {
-//     res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
-// });
+app.get('/', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
 
-// app.get('/watchlist', function(req,res) {
-//     res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
-// });
+app.get('/watchlist', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
 
-// app.get('/portfolio', function(req,res) {
-//     res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
-// });
+app.get('/portfolio', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
 
-// app.get('/details/:ticker', function(req,res) {
-//     res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
-// });
+app.get('/details/:ticker', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
 
 //API: automcomplete
 app.get('/api/autocomplete/:ticker', function (req, res) {

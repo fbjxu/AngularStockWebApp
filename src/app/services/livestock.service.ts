@@ -27,7 +27,7 @@ export class LivestockService {
   }
 
   public beginningLook(ticker: string) { //used to grab company summary
-    console.log("inside beginning look");
+    //console.log("inside beginning look");
     var summaryObserve: Observable<companySummary>;
     summaryObserve = this.dataService.getSummary(ticker);
     summaryObserve.subscribe((summaryData: companySummary) => {//get summary
@@ -40,7 +40,7 @@ export class LivestockService {
   }
 
   public reFreshPrice(ticker: string) {//repeatly request live stock info
-    console.log("inside reFreshPrice");
+    //console.log("inside reFreshPrice");
     var priceSummaryObserve: Observable<tickerPrice[]>;
     var dailyPriceObserve: Observable<dailyPrice[]>;
 
@@ -78,7 +78,7 @@ export class LivestockService {
         } else {
           this.liveStockData.livePriceUp = false;
         }
-        console.log("refreshed price: " + JSON.stringify(price));
+        //console.log("refreshed price: " + JSON.stringify(price));
       });
     })
   }

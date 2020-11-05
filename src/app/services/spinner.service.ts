@@ -11,16 +11,16 @@ export class SpinnerService {
 
   public visible(): void {
     this.isSpinning$.next(true);
-    console.log('Im inside visible()');
+    //console.log('Im inside visible()');
   }
 
   public invisible(): void {
     this.isSpinning$.next(false);
-    console.log('Im inside invisible()');
+    //console.log('Im inside invisible()');
   }
 
   public getIsOpen(): Observable<boolean>{
-    console.log('Im inside getIsOpen');
+    //console.log('Im inside getIsOpen');
     return this.isSpinning$;
   }
 }

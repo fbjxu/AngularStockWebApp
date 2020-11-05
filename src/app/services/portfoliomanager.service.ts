@@ -15,13 +15,13 @@ export class PortfoliomanagerService {
   constructor(private dataService:DataServiceService) { }
 
   public getPortfolioList(): portfolioEntry[] {//list of buy details
-    console.log("inside getPortfolioList");
+    //console.log("inside getPortfolioList");
     let localStorageItem = JSON.parse(localStorage.getItem('portfolio')); //get current json from local storage
     if (localStorageItem == null) {
       
       return [];
     }
-    console.log(localStorageItem.portfolio);
+    //console.log(localStorageItem.portfolio);
     return localStorageItem.portfolio;
   }
 
@@ -45,7 +45,7 @@ export class PortfoliomanagerService {
         this.setLocalStoragePortfolioList(portfolioList);//update local storage's portfolio number
         this.portfolioChange$.next(ticker_input.toLowerCase());
         this.buySuccess$.next(true);
-        console.log("inside buystock: added existed stock now the portfolio is: ", portfolioList);
+        //console.log("inside buystock: added existed stock now the portfolio is: ", portfolioList);
         return;
       }
     }
@@ -56,7 +56,7 @@ export class PortfoliomanagerService {
     this.setLocalStoragePortfolioList(portfolioList);
     this.setLocalStoragePortfolioTickers(portfolioTickers);
     this.portfolioChange$.next(ticker_input.toLowerCase());
-    console.log("inside buystock: added new stock: now the portfolio is", portfolioTickers);
+    //console.log("inside buystock: added new stock: now the portfolio is", portfolioTickers);
     return;
   }
 
@@ -75,7 +75,7 @@ export class PortfoliomanagerService {
         this.setLocalStoragePortfolioList(portfolioList);//update local storage's portfolio number
         this.setLocalStoragePortfolioTickers(portfolioTickers);
         this.portfolioChange$.next(ticker_input.toLowerCase());
-        console.log("inside sellstock: sold existed stock now the portfolio is: ", portfolioList);
+        //console.log("inside sellstock: sold existed stock now the portfolio is: ", portfolioList);
         return;
       }
     }

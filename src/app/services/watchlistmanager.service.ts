@@ -35,7 +35,7 @@ export class WatchlistmanagerService {
 
 
   public getWatchList(): watchListStock[] {
-    console.log("inside getWatchLIst");
+    //console.log("inside getWatchLIst");
     let localStorageItem = JSON.parse(localStorage.getItem('watchlist')); //get current json from local storage
     if (localStorageItem == null) {
       return [];
@@ -50,7 +50,7 @@ export class WatchlistmanagerService {
     this.setLocalStorageWatchList(watchlist);
     this.isYellowStar$.next(true);
     this.watchlistChange$.next(watchlist);
-    console.log(watchlist);
+    //console.log(watchlist);
   }
 
   public deleteTicker(ticker_input:string) {
@@ -59,7 +59,7 @@ export class WatchlistmanagerService {
     this.setLocalStorageWatchList(watchlist);
     this.isYellowStar$.next(false);
     this.watchlistChange$.next(watchlist);
-    console.log(watchlist);
+    //console.log(watchlist);
   }
 
   private setLocalStorageWatchList(watchlist: watchListStock[]) {
@@ -67,7 +67,7 @@ export class WatchlistmanagerService {
   }
 
   public createMyStocklist(): Observable<tickerPrice[]> {
-    console.log("inside createMyStocklist");
+    //console.log("inside createMyStocklist");
     var stockList: string[] = []
     var watchListItems = this.getWatchList();
     for (let watchStock of watchListItems) {

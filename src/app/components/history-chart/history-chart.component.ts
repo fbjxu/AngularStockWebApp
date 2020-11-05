@@ -32,7 +32,7 @@ vbp(HighchartsStockHistory);
 export class HistoryChartComponent implements OnInit, AfterViewInit {
   @Input() ticker:string;
   public historyOptions: any;
-  localTesting:string = "http://localhost:8080";
+  localTesting:string = "";
   constructor(
     public spinnerService:SpinnerService,
     private http: HttpClient,
@@ -42,7 +42,7 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.spinnerService.visible();
-    console.log("get ticker" +this.ticker);
+    // console.log("get ticker" +this.ticker);
     this.http.get<historyPrice[]>(this.localTesting+'/api/historychartsummary/'+this.ticker).subscribe(
       data=> {
         // console.log("data ready for history chart: "+ JSON.stringify(data));
@@ -78,7 +78,7 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
                 selected: 2
             },
             title: {
-                text: 'AAPL Historical'
+                text: this.ticker+' Historical'
             },
             subtitle: {
                 text: 'With SMA and Volume by Price technical indicators'
@@ -158,9 +158,9 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
                 }
             }]
         }
-        console.log("over here!!!!!!!!");
+        // console.log("over here!!!!!!!!");
         HighchartsStockHistory.stockChart('text',this.historyOptions);
-        console.log("over there!!!!!!!!");
+        // console.log("over there!!!!!!!!");
       }
     )
   }

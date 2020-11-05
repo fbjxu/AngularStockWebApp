@@ -39,7 +39,7 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
     //check price every 15s
     const source = interval(15000); //set interval to 15s
     this.subscription = source.pipe(startWith(0)).subscribe(val => {
-      console.log("called watchlist 15s subscription")
+      //console.log("called watchlist 15s subscription")
         this.watchlistmanager.createMyStocklist().subscribe(data=>
           { 
             var newmyWatchListDisplay =[];
@@ -59,7 +59,7 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
             }
             this.myWatchListDisplay = newmyWatchListDisplay;
           },
-          err => console.log("there is an error")
+          //err => console.log("there is an error")
         );
     })
 
@@ -73,9 +73,9 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
           this.myWatchListDisplay =[];
         }
         else {
-          console.log("inside filter  in detect change");
+          //("inside filter  in detect change");
           this.myWatchListDisplay = this.myWatchListDisplay.filter(item=>(item.ticker).toLowerCase()!=this.deletedTicker.toLowerCase());
-          console.log("current display (filtered): ", JSON.stringify(this.myWatchListDisplay))
+          //console.log("current display (filtered): ", JSON.stringify(this.myWatchListDisplay))
         }
       }
     )
@@ -84,7 +84,7 @@ export class WatchlistComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.spinnerService.invisible();
     this.showWatchList = true;
-    console.log(this.showWatchList);
+    //console.log(this.showWatchList);
   }
 
   onClick(ticker:string) {

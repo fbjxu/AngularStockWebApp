@@ -52,7 +52,7 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
   refreshRate:number = 15000; //divide 1000 to
   showWarning = false;
   public historyOptions: any;
-  localTesting:string = "http://localhost:8080";
+  localTesting:string = "";
   //stock info
   constructor(
     public portfolioManager: PortfoliomanagerService,
@@ -75,7 +75,7 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
     )
     this.livestockService.liveStockServiceInit(this.ticker);
     this.yellowStar = this.watchlistmanager.yellowStar(this.ticker);
-    console.log(this.yellowStar);
+    //console.log(this.yellowStar);
     this.watchlistmanager.getYellowStar().
       subscribe(starData =>{
         this.yellowStar = starData;
@@ -133,7 +133,7 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {
     setTimeout(()=> {
       this.spinnerService.invisible();
-      console.log("ngafter in stock detail " +this.livestockService.liveStockData.ticker);
+      //console.log("ngafter in stock detail " +this.livestockService.liveStockData.ticker);
       if(this.showWarning == false) {
         this.showSummary = true;
       }

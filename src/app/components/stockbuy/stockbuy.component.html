@@ -15,10 +15,10 @@
   <div class="modal-footer">
     <fieldset class="w-100">
     <p  class="float-left"> Total: {{ price * numShares }}</p>
-    <button *ngIf="isBuy && numShares>0" type="button" class="btn btn-success float-right" (click)="buyStock(ticker,name,numShares,price);activeModal.dismiss('Dismissed')">Buy</button>
-    <button *ngIf="isBuy && numShares<=0" type="button" class="btn btn-not-ready float-right" (click)="buyStock(ticker,name,numShares,price);activeModal.dismiss('Dismissed')">Buy</button>
-    <button *ngIf="!isBuy && numShares > 0 && numShares <= maxNumShares" type="button" class="btn btn-success float-right" (click)="sellStock(ticker,numShares);activeModal.dismiss('Dismissed')">Sell</button>
-    <button *ngIf="(!isBuy && numShares<=0) || (!isBuy && numShares> maxNumShares)" type="button" class="btn btn-not-ready float-right" (click)="buyStock(ticker,name,numShares,price);activeModal.dismiss('Dismissed')">Sell</button>
+    <button *ngIf="isBuy && numShares>=1" type="button" class="btn btn-success float-right" (click)="buyStock(ticker,name,numShares,price);activeModal.dismiss('Dismissed')">Buy</button>
+    <button *ngIf="isBuy && numShares<1" type="button" class="btn btn-not-ready float-right" (click)="buyStock(ticker,name,numShares,price);activeModal.dismiss('Dismissed')">Buy</button>
+    <button *ngIf="!isBuy && numShares >= 1 && numShares <= maxNumShares" type="button" class="btn btn-success float-right" (click)="sellStock(ticker,numShares);activeModal.dismiss('Dismissed')">Sell</button>
+    <button *ngIf="(!isBuy && numShares<1) || (!isBuy && numShares> maxNumShares)" type="button" class="btn btn-not-ready float-right" (click)="buyStock(ticker,name,numShares,price);activeModal.dismiss('Dismissed')">Sell</button>
     </fieldset>
   </div>
 
