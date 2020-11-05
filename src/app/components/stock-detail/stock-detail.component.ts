@@ -69,6 +69,7 @@ export class StockDetailComponent implements AfterViewInit, OnInit {
       data=> {
         if((data.ticker?data.ticker:"").length == 0) {
           this.showWarning = true;
+          this.spinnerService.invisible();
           this.showSummary = false;
         }
       }
