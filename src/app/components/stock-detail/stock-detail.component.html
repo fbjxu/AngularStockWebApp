@@ -1,6 +1,6 @@
 <div class="root">
     <div *ngIf="showWarning" class="container">
-        <div class="no-ticker" *ngIf="(livestockService.liveStockData.mid==null)">
+        <div class="no-ticker" *ngIf="(livestockService.liveStockData.livePrice==null)">
             No results found. Please enter valid Ticker
         </div>
     </div>

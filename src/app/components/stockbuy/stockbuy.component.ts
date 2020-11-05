@@ -22,7 +22,7 @@ export class StockbuyComponent implements OnInit {
   subscription:Subscription;
   numShares:number= 0;
   @Input() public price: number;
-  localTesting:string = "";
+  localTesting:string = "http://localhost:8080";
 
   constructor(
     public http: HttpClient,

@@ -22,7 +22,7 @@ const retryTimer = 5000;
 export class DataServiceService {
   //TODO: implement cache
   private api = "/api/";
-  localTesting:string = "";
+  localTesting:string = "http://localhost:8080";
   constructor(private http: HttpClient) { }
 
   //get summary method
