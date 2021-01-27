@@ -6,6 +6,7 @@ import { interval, Subscription } from 'rxjs';
 import { DataServiceService } from '../../services/data-service.service';
 import { historyPrice } from '../../models/historyPrice';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { ActivatedRoute } from '@angular/router';
 
 declare var require: any;
 let Boost = require('highcharts/modules/boost');
@@ -31,13 +32,20 @@ vbp(HighchartsStockHistory);
 })
 export class HistoryChartComponent implements OnInit, AfterViewInit {
   @Input() ticker:string;
+  ios_ticker:string;
   public historyOptions: any;
   localTesting:string = ""  
   constructor(
     public spinnerService:SpinnerService,
     private http: HttpClient,
-    public dataService:DataServiceService
+    public dataService:DataServiceService,
+    private route: ActivatedRoute
   ) { 
+    this.ios_ticker = this.route.snapshot.params['ticker']; //set ticker
+    if (this.ios_ticker!="")
+    {
+        this.ticker = this.ios_ticker
+    }
   }
 
   ngOnInit(): void {
@@ -77,12 +85,8 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
             rangeSelector: {
                 selected: 2
             },
-            title: {
-                text: this.ticker+' Historical'
-            },
-            subtitle: {
-                text: 'With SMA and Volume by Price technical indicators'
-            },
+            
+    
 
             yAxis: [{
                 startOnTick: false,
@@ -127,8 +131,8 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
 
             series: [{
                 type: 'candlestick',
-                name: 'AAPL',
-                id: 'aapl',
+                name: this.ticker,
+                id: 'sth',
                 zIndex: 2,
                 data: ohlc
             }, {
@@ -139,7 +143,7 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
                 yAxis: 1
             }, {
                 type: 'vbp',
-                linkedTo: 'aapl',
+                linkedTo: 'sth',
                 params: {
                     volumeSeriesID: 'volume'
                 },
@@ -151,7 +155,7 @@ export class HistoryChartComponent implements OnInit, AfterViewInit {
                 }
             }, {
                 type: 'sma',
-                linkedTo: 'aapl',
+                linkedTo: 'sth',
                 zIndex: 1,
                 marker: {
                     enabled: false

@@ -18,7 +18,7 @@ import { NewsWindowComponent } from '../news-window/news-window.component';
 export class NewsComponent implements OnInit {
   @Input() ticker: string;
   newsCollection:newsItem[] = []; 
-  localTesting:string = ""   
+  localTesting:string = ""  
 
   constructor(
     public spinnerService:SpinnerService,

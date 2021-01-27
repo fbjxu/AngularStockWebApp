@@ -4,6 +4,7 @@ import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { StockDetailComponent } from './components/stock-detail/stock-detail.component';
 import { MainComponent } from './components/main/main.component';
+import {HistoryChartComponent} from './components/history-chart/history-chart.component'
 
 import { AppComponent } from './app.component';
 
@@ -14,6 +15,11 @@ const routes: Routes = [
   {
     path: 'details', children: [
       { path: ":ticker", component: StockDetailComponent }
+    ]
+  },
+  {
+    path: 'iosChart', children: [
+      { path: ":ticker", component: HistoryChartComponent }
     ]
   }
 ];

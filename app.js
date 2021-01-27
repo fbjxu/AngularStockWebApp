@@ -10,7 +10,7 @@ var portNum = 8080;
 
 //helper attributes
 var token = "token=a4d9cb249227d4a1c64fac98783787069f17c866";
-var newstoken = "fd84f96ea1e248a29d8fa184296cdb8f";
+var newstoken = "bd4e30c8820e42c5871f6dc30a91ddc0";
 var today = getDate(new Date());
 var prevDate = getPrevDate(new Date());
 
@@ -58,6 +58,10 @@ app.get('/details/:ticker', function(req,res) {
     res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
 });
 
+app.get('/iosChart/:ticker', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/stock-web-app/index.html'));
+});
+
 //API: automcomplete
 app.get('/api/autocomplete/:ticker', function (req, res) {
 
@@ -88,6 +92,28 @@ app.get('/api/pricesummary/:ticker', function (req, res) {
     .then(res => res.json())
     .then(data=>{res.json(data)});
     
+});
+
+//comprehensive pricesummary
+app.get('/api/nicepricesummary/:ticker', function (req, res) {
+
+    let source1 = fetch("https://api.tiingo.com/iex/"+req.params.ticker+"?" + token, {
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    let source2 = fetch("https://api.tiingo.com/tiingo/daily/"+req.params.ticker+"?" + token, {
+        headers: { 'Content-Type': 'application/json'} 
+    });
+
+    Promise.all([source1, source2])
+    .then(async([source1, source2]) => {
+        const a = await source1.json();
+        const b = await source2.json();
+        return [a, b]
+    })
+    .then(data => {res.json(data)})
+
+
 });
 
 //API: dailyChart
